@@ -7,3 +7,9 @@ mcp-server/node_modules/
 mcp-server/dist/
 .DS_Store
 .env
+
+# Dados e WASM gerados para o site (scripts/export-site-data.mjs)
+site/data/
+site/wasm/
+site/examples/
+.claude/

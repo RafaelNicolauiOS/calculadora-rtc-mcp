@@ -3,6 +3,7 @@
 #   regime-regular   -> http://localhost:${RTC_REGIME_PORT:-8080}/api   (métricas 9101)
 #   simples-nacional -> http://localhost:${RTC_SIMPLES_PORT:-8082}/api  (métricas 9103)
 #   gerador-danfse   -> http://localhost:${RTC_DANFSE_PORT:-8090}/api
+#   proxy CORS       -> http://localhost:8079/{regime,simples,danfse}/  (desligue com RTC_PROXY=0)
 # Ctrl+C encerra as três.
 set -euo pipefail
 
@@ -32,5 +33,14 @@ pids+=($!)
 pids+=($!)
 SERVER_PORT="${RTC_DANFSE_PORT:-8090}" ./danfse-service &
 pids+=($!)
+
+# Proxy com CORS na porta 8079, usado pelo site (GitHub Pages) para chamar as APIs locais.
+if command -v node >/dev/null 2>&1 && [ "${RTC_PROXY:-1}" != "0" ]; then
+  RTC_REGIME_URL="http://localhost:${RTC_REGIME_PORT:-8080}/api" \
+  RTC_SIMPLES_URL="http://localhost:${RTC_SIMPLES_PORT:-8082}/api" \
+  RTC_DANFSE_URL="http://localhost:${RTC_DANFSE_PORT:-8090}/api" \
+    node "$ROOT/scripts/cors-proxy.mjs" &
+  pids+=($!)
+fi
 
 wait

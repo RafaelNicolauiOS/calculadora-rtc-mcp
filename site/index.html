@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora RTC aberta</title>
+  <meta name="description" content="Consulta às tabelas, cálculo de CBS/IBS/IS e gerador de DANFSe a partir do código aberto da Calculadora de Tributos da Reforma Tributária. Projeto não oficial.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23155e63'/%3E%3Ctext x='16' y='22' font-family='system-ui,sans-serif' font-size='15' font-weight='700' fill='white' text-anchor='middle'%3E%25%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/app.css">
+  <script type="module" src="assets/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <header class="topo">
+    <div class="topo-inner">
+      <a class="marca" href="#inicio">
+        <span class="marca-icone" aria-hidden="true">%</span>
+        <span>
+          <strong>Calculadora RTC aberta</strong>
+          <small>CBS · IBS · Imposto Seletivo · projeto não oficial</small>
+        </span>
+      </a>
+      <button class="menu-btn" aria-expanded="false" aria-controls="nav" type="button">Menu</button>
+      <nav id="nav" aria-label="Seções">
+        <a href="#inicio">Início</a>
+        <a href="#classificacoes">Classificações</a>
+        <a href="#nomenclaturas">NCM / NBS</a>
+        <a href="#calculadora">Calculadora</a>
+        <a href="#simples">Simples Nacional</a>
+        <a href="#danfse">DANFSe</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo" tabindex="-1">
+    <!-- ============================================================ INÍCIO -->
+    <section id="pg-inicio" class="pagina" data-pagina="inicio">
+      <div class="hero">
+        <h1>As regras da Reforma Tributária, abertas e consultáveis</h1>
+        <p class="lead">Este site usa o código-fonte que a Receita Federal publicou no GitHub (licença MIT) para você consultar as classificações tributárias, conferir NCM e NBS, simular o cálculo de CBS, IBS e Imposto Seletivo e gerar o DANFSe de uma NFS-e.</p>
+        <div class="aviso" role="note">
+          <strong>Projeto não oficial.</strong> Não é mantido nem endossado pela Receita Federal ou pelo Serpro. Os resultados servem para estudo e conferência e não substituem orientação profissional nem os sistemas oficiais.
+        </div>
+      </div>
+
+      <div class="cards">
+        <a class="card-link" href="#classificacoes">
+          <h2>Classificações</h2>
+          <p>Todas as cClassTrib com CST, reduções, crédito, documentos aceitos e fundamentação legal.</p>
+          <span class="tag tag-ok">Funciona offline</span>
+        </a>
+        <a class="card-link" href="#nomenclaturas">
+          <h2>NCM / NBS</h2>
+          <p>Busca por código ou descrição e as classificações às quais cada código está vinculado.</p>
+          <span class="tag tag-ok">Funciona offline</span>
+        </a>
+        <a class="card-link" href="#danfse">
+          <h2>DANFSe</h2>
+          <p>PDF da NFS-e gerado no seu navegador, via WebAssembly. O XML não sai do seu computador.</p>
+          <span class="tag tag-ok">Funciona offline</span>
+        </a>
+        <a class="card-link" href="#calculadora">
+          <h2>Calculadora</h2>
+          <p>CBS, IBS e IS por item, com memória de cálculo, usando o motor oficial.</p>
+          <span class="tag tag-api">Requer API</span>
+        </a>
+        <a class="card-link" href="#simples">
+          <h2>Simples Nacional</h2>
+          <p>Atividades e anexos do Simples e o cálculo de CBS/IBS para optantes.</p>
+          <span class="tag tag-api">Cálculo requer API</span>
+        </a>
+      </div>
+
+      <div class="duas-colunas">
+        <section class="bloco">
+          <h2>Versões dos dados</h2>
+          <dl id="versoes" class="dl-grade"><dt>Carregando…</dt><dd></dd></dl>
+        </section>
+        <section class="bloco">
+          <h2>Por que “requer API”?</h2>
+          <p>O motor de cálculo oficial é uma aplicação Java e não roda num site estático. Para calcular, rode as APIs no seu computador (ou num servidor) e informe o endereço na aba Calculadora:</p>
+          <pre class="cmd"><code>git clone --recurse-submodules https://github.com/RafaelNicolauiOS/calculadora-rtc-mcp.git
+cd calculadora-rtc-mcp
+./scripts/build.sh
+./scripts/run.sh</code></pre>
+          <p class="sutil">O <code>run.sh</code> sobe as três APIs e um proxy em <code>http://localhost:8079</code> que libera o acesso a partir deste site.</p>
+        </section>
+      </div>
+    </section>
+
+    <!-- ============================================================ CLASSIFICAÇÕES -->
+    <section id="pg-classificacoes" class="pagina" data-pagina="classificacoes" hidden>
+      <h1>Classificações tributárias (cClassTrib)</h1>
+      <div class="filtros">
+        <label>Buscar
+          <input id="cls-busca" type="search" placeholder="Código ou descrição, ex.: 200028, educação, cesta básica" autocomplete="off">
+        </label>
+        <label>CST
+          <select id="cls-cst"><option value="">Todos</option></select>
+        </label>
+        <label>Vigência em
+          <select id="cls-data"></select>
+        </label>
+      </div>
+      <p id="cls-contagem" class="sutil" aria-live="polite"></p>
+      <div class="mestre-detalhe">
+        <ul id="cls-lista" class="lista" aria-label="Classificações"></ul>
+        <article id="cls-detalhe" class="detalhe" aria-live="polite">
+          <p class="sutil">Selecione uma classificação para ver os detalhes.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================================================ NCM / NBS -->
+    <section id="pg-nomenclaturas" class="pagina" data-pagina="nomenclaturas" hidden>
+      <h1>NCM e NBS</h1>
+      <div class="filtros">
+        <label>Tabela
+          <select id="nom-tipo">
+            <option value="ncm">NCM (bens)</option>
+            <option value="nbs">NBS (serviços)</option>
+          </select>
+        </label>
+        <label class="cresce">Buscar
+          <input id="nom-busca" type="search" placeholder="Código (ou início dele) ou parte da descrição" autocomplete="off">
+        </label>
+      </div>
+      <p class="sutil">As classificações listadas vêm dos vínculos de NCM/NBS do banco oficial (por código ou prefixo, com exceções). A validação definitiva acontece no cálculo.</p>
+      <p id="nom-contagem" class="sutil" aria-live="polite"></p>
+      <div class="tabela-wrap">
+        <table class="tabela" id="nom-tabela">
+          <thead><tr><th scope="col">Código</th><th scope="col">Descrição</th><th scope="col">Classificações vinculadas</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============================================================ CALCULADORA -->
+    <section id="pg-calculadora" class="pagina" data-pagina="calculadora" hidden>
+      <h1>Calculadora — regime regular</h1>
+      <div class="api-barra">
+        <label class="cresce">Endereço da API (proxy)
+          <input id="api-url" type="url" value="http://localhost:8079" spellcheck="false">
+        </label>
+        <button id="api-testar" type="button" class="btn-sec">Testar conexão</button>
+        <span id="api-status" class="status" aria-live="polite">não testado</span>
+      </div>
+
+      <form id="calc-form" class="calc" novalidate>
+        <fieldset>
+          <legend>Operação</legend>
+          <div class="grade-campos">
+            <label>Data do fato gerador
+              <input id="calc-data" type="date" required>
+            </label>
+            <label>Hora
+              <input id="calc-hora" type="time" value="10:00" required>
+            </label>
+            <label>UF
+              <select id="calc-uf" required></select>
+            </label>
+            <label class="cresce">Município
+              <select id="calc-mun" required></select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset id="calc-aliq" hidden>
+          <legend>Alíquotas nominais (%)</legend>
+          <p class="sutil">A partir de 2027 as alíquotas devem ser informadas. O resultado sai como cálculo simulado.</p>
+          <div class="grade-campos">
+            <label>CBS <input id="aliq-cbs" type="number" step="0.0001" min="0" inputmode="decimal" placeholder="ex.: 8.8"></label>
+            <label>IBS estadual <input id="aliq-ibsuf" type="number" step="0.0001" min="0" inputmode="decimal" placeholder="ex.: 0.05"></label>
+            <label>IBS municipal <input id="aliq-ibsmun" type="number" step="0.0001" min="0" inputmode="decimal" placeholder="ex.: 0.05"></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Itens</legend>
+          <div id="calc-itens"></div>
+          <datalist id="dl-classificacoes"></datalist>
+          <button id="calc-add" type="button" class="btn-sec">+ Adicionar item</button>
+        </fieldset>
+
+        <div class="acoes">
+          <button type="submit" class="btn">Calcular</button>
+          <button id="calc-exemplo" type="button" class="btn-sec">Carregar exemplo</button>
+        </div>
+
+        <details class="json-box">
+          <summary>JSON da requisição (editável)</summary>
+          <textarea id="calc-json" rows="14" spellcheck="false" aria-label="JSON da requisição"></textarea>
+          <button id="calc-enviar-json" type="button" class="btn-sec">Enviar este JSON</button>
+        </details>
+      </form>
+
+      <div id="calc-resultado" aria-live="polite"></div>
+    </section>
+
+    <!-- ============================================================ SIMPLES -->
+    <section id="pg-simples" class="pagina" data-pagina="simples" hidden>
+      <h1>Simples Nacional</h1>
+      <div class="aviso aviso-info" role="note">A Calculadora não calcula a alíquota efetiva do Simples. Ela vem do PGDAS-D e é informada em <code>aliquotasEfetivas</code>.</div>
+
+      <h2>Atividades (cAtivSN)</h2>
+      <div class="tabela-wrap">
+        <table class="tabela" id="sn-atividades">
+          <thead><tr><th scope="col">Código</th><th scope="col">Atividade</th><th scope="col">Anexo</th><th scope="col">Fator r</th><th scope="col">Documentos</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <h2>Cálculo</h2>
+      <p class="sutil">Usa o mesmo endereço de API da aba Calculadora. Escolha um exemplo oficial e ajuste o JSON.</p>
+      <div class="acoes">
+        <select id="sn-exemplo" aria-label="Exemplo"></select>
+        <button id="sn-calcular" type="button" class="btn">Calcular</button>
+      </div>
+      <textarea id="sn-json" rows="18" spellcheck="false" aria-label="JSON da operação do Simples Nacional"></textarea>
+      <div id="sn-resultado" aria-live="polite"></div>
+    </section>
+
+    <!-- ============================================================ DANFSe -->
+    <section id="pg-danfse" class="pagina" data-pagina="danfse" hidden>
+      <h1>Gerador de DANFSe</h1>
+      <p>Gera o PDF do DANFSe a partir do XML de uma NFS-e. Tudo roda no seu navegador, com o código oficial compilado para WebAssembly. O XML não é enviado a nenhum servidor.</p>
+
+      <div class="danfse">
+        <div class="danfse-entrada">
+          <label class="soltar" id="danfse-soltar">
+            <input id="danfse-arquivo" type="file" accept=".xml,application/xml,text/xml">
+            <span><strong>Escolha o arquivo XML</strong> ou arraste aqui</span>
+          </label>
+          <label>Ou cole o XML
+            <textarea id="danfse-xml" rows="10" spellcheck="false"></textarea>
+          </label>
+          <div class="grade-campos">
+            <label>Situação da nota
+              <select id="danfse-stc">
+                <option value="0">Válida</option>
+                <option value="1">Cancelada</option>
+                <option value="2">Substituída</option>
+              </select>
+            </label>
+            <label class="check"><input id="danfse-canhoto" type="checkbox" checked> Incluir canhoto</label>
+          </div>
+          <div class="acoes">
+            <button id="danfse-gerar" type="button" class="btn">Gerar PDF</button>
+            <button id="danfse-exemplo" type="button" class="btn-sec">Usar NFS-e fictícia</button>
+          </div>
+          <p id="danfse-status" class="sutil" aria-live="polite"></p>
+        </div>
+        <div class="danfse-saida" id="danfse-saida">
+          <p class="sutil">O PDF aparece aqui.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>Código deste site: <a href="https://github.com/RafaelNicolauiOS/calculadora-rtc-mcp">calculadora-rtc-mcp</a> (MIT). Motor de cálculo: repositórios oficiais da Receita Federal —
+      <a href="https://github.com/ReceitaFederal/calculadora-rtc-regime-regular">regime regular</a>,
+      <a href="https://github.com/ReceitaFederal/calculadora-rtc-simples-nacional">Simples Nacional</a>,
+      <a href="https://github.com/ReceitaFederal/calculadora-rtc-gerador-danfse">gerador de DANFSe</a>.</p>
+    <p>Projeto independente, sem vínculo com a Receita Federal ou o Serpro.</p>
+  </footer>
+</body>
+</html>

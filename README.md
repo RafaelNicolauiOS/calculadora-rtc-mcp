@@ -10,6 +10,15 @@ Servidor **MCP** (Model Context Protocol) que integra as três APIs de código a
 
 Com o MCP, um assistente (Claude, ou outro cliente MCP) consegue escolher a classificação tributária, conferir NCM/NBS, calcular, explicar erros, gerar e validar o XML do DF-e e gerar o DANFSe na mesma conversa.
 
+**Site:** https://rafaelnicolauios.github.io/calculadora-rtc-mcp/
+
+| Seção do site | Como funciona |
+|---|---|
+| Classificações (cClassTrib) | Offline: dados exportados das APIs oficiais a cada publicação |
+| NCM / NBS | Offline, com as classificações vinculadas a cada código |
+| DANFSe | Offline: o gerador oficial compilado para WebAssembly roda no navegador, e o XML não sai do computador |
+| Calculadora e Simples Nacional | Chamam as APIs pelo proxy em `http://localhost:8079`, que o `scripts/run.sh` sobe junto com as APIs |
+
 > **Projeto não oficial.** Não é mantido nem endossado pela Receita Federal ou pelo Serpro. Ele apenas compila e chama o código oficial, sem alterar as regras de cálculo. Os resultados não substituem orientação profissional nem os sistemas oficiais de autorização de documentos fiscais.
 
 ## Estrutura
@@ -17,9 +26,12 @@ Com o MCP, um assistente (Claude, ou outro cliente MCP) consegue escolher a clas
 ```
 upstream/          submódulos git apontando para os 3 repositórios oficiais (versões fixadas)
 scripts/build.sh   compila banco SQLite, os 2 JARs, o binário e o WASM do DANFSe em dist/
-scripts/run.sh     sobe as 3 APIs a partir de dist/, sem Docker
+scripts/run.sh     sobe as 3 APIs a partir de dist/, sem Docker, mais o proxy CORS
+scripts/cors-proxy.mjs          proxy na porta 8079 que libera o acesso do site às APIs
+scripts/export-site-data.mjs    gera site/data/*.json e copia o WASM para o site
 docker-compose.yml sobe as 3 APIs em containers
 mcp-server/        servidor MCP em TypeScript (stdio)
+site/              site estático publicado no GitHub Pages (HTML, CSS e JS, sem build)
 examples/          NFS-e fictícia para testar o DANFSe
 ```
 
@@ -140,10 +152,25 @@ git submodule update --remote
 
 Rode `npm run smoke` em `mcp-server/` antes de publicar.
 
+## Site
+
+O site em `site/` é publicado pelo workflow [`ci.yml`](.github/workflows/ci.yml) a cada push na `main` e toda segunda-feira. O workflow compila as APIs, roda o teste de fumaça, exporta os dados com `scripts/export-site-data.mjs` e publica no GitHub Pages.
+
+Para rodar localmente (com as APIs no ar):
+
+```bash
+node scripts/export-site-data.mjs
+```
+
+```bash
+python3 -m http.server 5173 --directory site
+```
+
+**Calculadora no site publicado:** a API do regime regular não envia cabeçalhos CORS, então o site chama as APIs pelo `scripts/cors-proxy.mjs`, na porta 8079. Ele libera `https://*.github.io` e `localhost` por padrão. Para outras origens, defina `RTC_CORS_ORIGINS`. Para hospedar as APIs num servidor, coloque o proxy atrás de HTTPS e informe o endereço no campo "Endereço da API" do site.
+
 ## Próximos passos
 
-- [ ] Site estático no GitHub Pages: DANFSe 100% no navegador via WebAssembly (`dist/danfse.wasm`, já compilado pelo `build.sh`) e consulta às tabelas (cClassTrib, NCM/NBS) a partir do SQLite exportado.
-- [ ] Hospedar as APIs Java para cálculo online a partir do site.
+- [ ] Hospedar as APIs Java para o site calcular sem instalar nada.
 - [ ] Publicar o MCP no npm.
 
 ## Licença
