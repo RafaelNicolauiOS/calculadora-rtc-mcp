@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+          cache: maven
+          cache-dependency-path: upstream/*/pom.xml
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.27"
+          cache-dependency-path: upstream/gerador-danfse/go.sum
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: mcp-server/package-lock.json
+
+      - name: Compilar APIs (banco, JARs, DANFSe e WASM)
+        run: ./scripts/build.sh
+
+      - name: Compilar MCP
+        working-directory: mcp-server
+        run: npm ci && npm run build
+
+      - name: Subir APIs
+        run: |
+          nohup ./scripts/run.sh > apis.log 2>&1 &
+          for i in $(seq 1 60); do
+            a=$(curl -s -o /dev/null -w '%{http_code}' localhost:8080/api/api-docs || true)
+            b=$(curl -s -o /dev/null -w '%{http_code}' localhost:8082/api/api-docs || true)
+            c=$(curl -s -o /dev/null -w '%{http_code}' localhost:8090/health/ready || true)
+            [ "$a$b$c" = "200200200" ] && exit 0
+            sleep 3
+          done
+          cat apis.log; exit 1
+
+      - name: Teste de fumaça do MCP
+        working-directory: mcp-server
+        run: npm run smoke
+
+      - name: Publicar WASM do DANFSe como artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: danfse-wasm
+          path: |
+            dist/danfse.wasm
+            dist/wasm_exec.js

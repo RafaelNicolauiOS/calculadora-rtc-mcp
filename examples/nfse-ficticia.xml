@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- NFS-e FICTÍCIA, apenas para testar a geração do DANFSe. Nomes, CNPJs e valores são inventados. -->
+<NFSe versao="1.01">
+  <infNFSe Id="NFS43149022200000000000100000000000000012600000000000000001">
+    <xLocEmi>Porto Alegre</xLocEmi>
+    <xLocPrestacao>Porto Alegre</xLocPrestacao>
+    <nNFSe>1</nNFSe>
+    <cLocIncid>4314902</cLocIncid>
+    <xLocIncid>Porto Alegre</xLocIncid>
+    <xTribNac>Ensino regular pré-escolar, fundamental, médio e superior.</xTribNac>
+    <ambGer>2</ambGer>
+    <cStat>100</cStat>
+    <dhProc>2027-03-10T10:05:00-03:00</dhProc>
+    <emit>
+      <CNPJ>00000000000100</CNPJ>
+      <IM>12345</IM>
+      <xNome>ESCOLA EXEMPLO FICTICIA LTDA</xNome>
+      <enderNac>
+        <xLgr>Rua Exemplo</xLgr>
+        <nro>100</nro>
+        <xBairro>Centro</xBairro>
+        <cMun>4314902</cMun>
+        <UF>RS</UF>
+        <CEP>90000000</CEP>
+      </enderNac>
+      <email>contato@example.com</email>
+    </emit>
+    <valores>
+      <vBC>1200.00</vBC>
+      <vLiq>1200.00</vLiq>
+    </valores>
+    <DPS versao="1.01">
+      <infDPS Id="DPS431490220000000000010000100000000000001">
+        <tpAmb>2</tpAmb>
+        <dhEmi>2027-03-10T10:00:00-03:00</dhEmi>
+        <serie>1</serie>
+        <nDPS>1</nDPS>
+        <dCompet>2027-03-10</dCompet>
+        <tpEmit>1</tpEmit>
+        <cLocEmi>4314902</cLocEmi>
+        <prest>
+          <CNPJ>00000000000100</CNPJ>
+          <regTrib>
+            <opSimpNac>1</opSimpNac>
+            <regEspTrib>0</regEspTrib>
+          </regTrib>
+        </prest>
+        <toma>
+          <CPF>00000000000</CPF>
+          <xNome>TOMADOR FICTICIO</xNome>
+          <end>
+            <endNac><cMun>4314902</cMun><CEP>90000000</CEP></endNac>
+            <xLgr>Avenida Exemplo</xLgr>
+            <nro>200</nro>
+            <xBairro>Centro</xBairro>
+          </end>
+        </toma>
+        <serv>
+          <locPrest><cLocPrestacao>4314902</cLocPrestacao></locPrest>
+          <cServ>
+            <cTribNac>080101</cTribNac>
+            <xDescServ>Mensalidade escolar - março/2027 (exemplo)</xDescServ>
+            <cNBS>122011200</cNBS>
+          </cServ>
+        </serv>
+        <valores>
+          <vServPrest><vServ>1200.00</vServ></vServPrest>
+          <trib>
+            <tribMun><tribISSQN>1</tribISSQN><tpRetISSQN>1</tpRetISSQN></tribMun>
+            <totTrib><indTotTrib>0</indTotTrib></totTrib>
+          </trib>
+        </valores>
+      </infDPS>
+    </DPS>
+  </infNFSe>
+</NFSe>

@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "calculadora-rtc": {
+      "command": "node",
+      "args": ["mcp-server/dist/index.js"],
+      "env": {
+        "RTC_REGIME_URL": "http://localhost:8080/api",
+        "RTC_SIMPLES_URL": "http://localhost:8082/api",
+        "RTC_DANFSE_URL": "http://localhost:8090/api"
+      }
+    }
+  }
+}

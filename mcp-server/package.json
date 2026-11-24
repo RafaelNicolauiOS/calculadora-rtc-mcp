@@ -1,0 +1,30 @@
+{
+  "name": "calculadora-rtc-mcp",
+  "version": "0.1.0",
+  "description": "Servidor MCP (não oficial) que integra as três APIs da Calculadora de Tributos da Reforma Tributária do Consumo publicadas pela Receita Federal: regime regular, Simples Nacional e gerador de DANFSe.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "calculadora-rtc-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && chmod +x dist/index.js",
+    "start": "node dist/index.js",
+    "dev": "tsc -p tsconfig.json --watch",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "typescript": "7.0.2"
+  }
+}

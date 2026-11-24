@@ -1,0 +1,12 @@
+[submodule "upstream/regime-regular"]
+	path = upstream/regime-regular
+	url = https://github.com/ReceitaFederal/calculadora-rtc-regime-regular.git
+	ignore = dirty
+[submodule "upstream/simples-nacional"]
+	path = upstream/simples-nacional
+	url = https://github.com/ReceitaFederal/calculadora-rtc-simples-nacional.git
+	ignore = dirty
+[submodule "upstream/gerador-danfse"]
+	path = upstream/gerador-danfse
+	url = https://github.com/ReceitaFederal/calculadora-rtc-gerador-danfse.git
+	ignore = dirty

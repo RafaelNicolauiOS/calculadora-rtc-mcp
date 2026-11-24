@@ -1,0 +1,9 @@
+# JDK local baixado para compilar (scripts/build.sh)
+.tools/
+# Artefatos de build (JARs, binários, WASM, banco SQLite)
+dist/
+# MCP
+mcp-server/node_modules/
+mcp-server/dist/
+.DS_Store
+.env

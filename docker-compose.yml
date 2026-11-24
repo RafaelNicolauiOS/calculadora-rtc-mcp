@@ -1,0 +1,34 @@
+# Sobe as três APIs da Calculadora RTC.
+#   docker compose up --build
+# Portas no host: regime-regular 8080, simples-nacional 8082, gerador-danfse 8090.
+services:
+  regime-regular:
+    build:
+      context: .
+      dockerfile: docker/java.Dockerfile
+      args:
+        MODULE: regime-regular
+        JAR: api-regime-geral.jar
+    ports: ["8080:8080"]
+    restart: unless-stopped
+
+  simples-nacional:
+    build:
+      context: .
+      dockerfile: docker/java.Dockerfile
+      args:
+        MODULE: simples-nacional
+        JAR: api-simples-nacional.jar
+    ports: ["8082:8080"]
+    restart: unless-stopped
+
+  gerador-danfse:
+    # Usa o Dockerfile oficial do próprio repositório da Receita.
+    # O Dockerfile oficial compila com GOARCH=amd64; em Mac ARM roda via emulação.
+    platform: linux/amd64
+    build:
+      context: upstream/gerador-danfse
+    environment:
+      SERVER_PORT: "8080"
+    ports: ["8090:8080"]
+    restart: unless-stopped
