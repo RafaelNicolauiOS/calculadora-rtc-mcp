@@ -105,8 +105,12 @@ export async function chamarApi(caminho, corpo) {
       body: corpo === undefined ? undefined : JSON.stringify(corpo),
     });
   } catch {
+    const local = /^https?:\/\/(localhost|127\.0\.0\.1)(:|\/|$)/.test(apiUrl()) && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname);
     throw new Error(
-      `Não foi possível conectar em ${apiUrl()}. Verifique se as APIs e o proxy estão rodando (./scripts/run.sh) e se o endereço está correto.`,
+      `Não foi possível conectar em ${apiUrl()}. Verifique se as APIs e o proxy estão rodando (./scripts/run.sh) e se o endereço está correto.` +
+        (local
+          ? " Se estiverem rodando, o navegador pode estar bloqueando o acesso deste site à sua rede local: permita o “acesso à rede local” quando o navegador pedir (ícone na barra de endereço) e desative bloqueadores de anúncios para este site."
+          : ""),
     );
   }
   const texto = await res.text();
@@ -129,11 +133,17 @@ export async function testarApi() {
     if (r.status !== 200 || !r.json) throw new Error(`HTTP ${r.status}`);
     st.textContent = `conectado · versão ${r.json.versaoApp}`;
     st.className = "status ok";
+    $("#api-dica")?.setAttribute("hidden", "");
     return true;
   } catch (e) {
     st.textContent = "sem conexão";
     st.className = "status erro";
     st.title = e.message;
+    const dica = $("#api-dica");
+    if (dica) {
+      dica.textContent = e.message;
+      dica.hidden = false;
+    }
     return false;
   }
 }
