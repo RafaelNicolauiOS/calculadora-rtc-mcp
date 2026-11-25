@@ -56,7 +56,7 @@ Nada foi lançado no sistema. Contas conforme o seu plano:
 
 | Data | Débito | Crédito | Valor | Histórico |
 |---|---|---|---:|---|
-| 03/06 | Tarifas bancárias | Banco | 89,90 | Tarifa pacote de serviços 06/2025 |
+| 03/06 | Tarifas bancárias | Banco | 89,90 | Tarifa pacote de serviços 06/2027 |
 | 12/06 | IOF (despesa financeira) | Banco | 4,32 | IOF s/ operação bancária |
 
 (A competência no histórico é só ilustrativa; ajuste conforme o caso.)

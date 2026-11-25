@@ -39,7 +39,7 @@ Por favorecido:
 
 1. **João (sócio), R$ 5.000,00, 02/07**: foi retirada de lucros, pró-labore, empréstimo (mútuo) ao sócio ou despesa pessoal dele paga pela empresa? Lancei em Lucros a distribuir (2.3.1.01) porque movimento com sócio não vai a despesa. Se for pró-labore, o lançamento muda e entram INSS e IRRF. Se for adiantamento ou mútuo, o plano **não tem uma conta adequada**. Sugiro criar "Adiantamentos a sócios" (ativo) ou "Mútuo com sócios".
 2. **XYZ Ltda, R$ 7.000,00, 12/07**: esse valor é de uma venda já faturada e registrada em Clientes? Lancei a crédito de Clientes (1.1.2.01). Se a receita não foi reconhecida antes (venda à vista ou regime de caixa), o crédito correto seria 3.1.1.01 Receita de serviços.
-3. **DAS, R$ 1.150,00, 10/07**: confirme que a competência do DAS (provavelmente 06/2025) já está provisionada em 2.1.3.01. Se não estava provisionada, o débito vai à despesa de impostos, e o plano não tem essa conta (sugiro criar "Impostos e taxas sobre receita").
+3. **DAS, R$ 1.150,00, 10/07**: confirme que a competência do DAS (provavelmente a do mês anterior) já está provisionada em 2.1.3.01. Se não estava provisionada, o débito vai à despesa de impostos, e o plano não tem essa conta (sugiro criar "Impostos e taxas sobre receita").
 4. **Madeiras SA, R$ 3.200,00**: a nota já foi provisionada em Fornecedores? Se não foi, a contrapartida é a conta de custo ou despesa e a nota precisa ser lançada.
 5. **CEMIG, R$ 410,00**: sem dúvida de classificação. Só confirme se a conta de luz não é de imóvel de sócio.
 
