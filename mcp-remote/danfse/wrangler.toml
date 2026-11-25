@@ -7,11 +7,10 @@ preview_urls = false
 [limits]
 cpu_ms = 30000
 
+# Sem logs: o gerador oficial em Go escreve no console dados vindos do XML.
 [observability]
-enabled = true
-head_sampling_rate = 1
+enabled = false
 
 [observability.logs]
-enabled = true
+enabled = false
 invocation_logs = false
-head_sampling_rate = 1
