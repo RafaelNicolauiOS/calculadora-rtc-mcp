@@ -88,26 +88,33 @@ const vigente = (prefixo, data) =>
   `${prefixo}_INICIO_VIGENCIA <= '${data}' AND (${prefixo}_FIM_VIGENCIA IS NULL OR ${prefixo}_FIM_VIGENCIA >= '${data}')`;
 
 // NCM/NBS vinculados a cada cClassTrib (códigos podem ser prefixos: capítulo, posição etc.).
+// IBS/CBS e Imposto Seletivo reutilizam os mesmos códigos de cClassTrib (ex.: 000001 existe nos dois),
+// então os vínculos são separados pelo tributo da situação tributária da classificação.
 const vinculos = {};
+const vinculosIs = {};
+const ehIs = `EXISTS (SELECT 1 FROM TRIBUTO_SITUACAO_TRIBUTARIA x JOIN TRIBUTO t ON t.TBTO_ID = x.TRST_TBTO_ID
+                      WHERE x.TRST_SITR_ID = c.CLTR_SITR_ID AND t.TBTO_SIGLA = 'IS') is_is`;
+const destino = (r) => (r.is_is ? vinculosIs : vinculos);
 for (const r of db
   .prepare(
-    `SELECT c.CLTR_CD cls, n.NCMA_NCM_CD cod,
+    `SELECT c.CLTR_CD cls, n.NCMA_NCM_CD cod, ${ehIs},
             (SELECT group_concat(e.ENCM_NCM_CD) FROM EXCECAO_NCM_APLICAVEL e WHERE e.ENCM_NCMA_ID = n.NCMA_ID AND ${vigente("e.ENCM", dataNom)}) exc
        FROM NCM_APLICAVEL n JOIN CLASSIFICACAO_TRIBUTARIA c ON c.CLTR_ID = n.NCMA_CLTR_ID
       WHERE ${vigente("n.NCMA", dataNom)} ORDER BY 1, 2`,
   )
   .all()) {
-  ((vinculos[r.cls] ??= { ncm: [], nbs: [] }).ncm).push(r.exc ? [r.cod, r.exc.split(",")] : [r.cod]);
+  ((destino(r)[r.cls] ??= { ncm: [], nbs: [] }).ncm).push(r.exc ? [r.cod, r.exc.split(",")] : [r.cod]);
 }
 for (const r of db
   .prepare(
-    `SELECT c.CLTR_CD cls, n.NBSA_NBS_CD cod FROM NBS_APLICAVEL n JOIN CLASSIFICACAO_TRIBUTARIA c ON c.CLTR_ID = n.NBSA_CLTR_ID
+    `SELECT c.CLTR_CD cls, n.NBSA_NBS_CD cod, ${ehIs}
+       FROM NBS_APLICAVEL n JOIN CLASSIFICACAO_TRIBUTARIA c ON c.CLTR_ID = n.NBSA_CLTR_ID
       WHERE ${vigente("n.NBSA", dataNom)} ORDER BY 1, 2`,
   )
   .all()) {
-  ((vinculos[r.cls] ??= { ncm: [], nbs: [] }).nbs).push([r.cod]);
+  ((destino(r)[r.cls] ??= { ncm: [], nbs: [] }).nbs).push([r.cod]);
 }
-await save("vinculos-nomenclatura.json", { data: dataNom, vinculos });
+await save("vinculos-nomenclatura.json", { data: dataNom, vinculos, vinculosIs });
 
 const ufs = db.prepare("SELECT UF_CD cod, UF_SIGLA sigla, UF_NOME nome FROM UF ORDER BY UF_SIGLA").all();
 const municipios = db
