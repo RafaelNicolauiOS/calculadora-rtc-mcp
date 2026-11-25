@@ -28,7 +28,7 @@ export function paginaPrivacidade(): string {
 <li>As consultas usam só dados públicos. Nada do que você envia nelas é guardado.</li>
 <li>No DANFSe, o XML da NFS-e é usado apenas para gerar o PDF e não é gravado nem registrado em log.</li>
 <li>O PDF gerado fica disponível por um link aleatório durante 1 hora e é apagado depois.</li>
-<li>Os registros técnicos guardam só a rota, o status e a duração das requisições.</li>
+<li>Os registros técnicos guardam só o padrão da rota (por exemplo, /pdf/:id), o status e a duração de cada requisição. Não registram IP, navegador, o XML nem os identificadores dos PDFs.</li>
 <li>Projeto não oficial: não substitui orientação profissional nem os sistemas oficiais de documentos fiscais.</li>
 </ul>`,
   );

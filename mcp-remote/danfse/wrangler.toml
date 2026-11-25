@@ -10,3 +10,8 @@ cpu_ms = 30000
 [observability]
 enabled = true
 head_sampling_rate = 1
+
+[observability.logs]
+enabled = true
+invocation_logs = false
+head_sampling_rate = 1
