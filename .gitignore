@@ -13,3 +13,6 @@ site/data/
 site/wasm/
 site/examples/
 .claude/
+
+# pacote da skill para o Agensi (gerado por scripts/build-skill.mjs + zip)
+skill/*.zip
