@@ -14,7 +14,9 @@ classificações tributárias, anexos de NCM/NBS, Imposto Seletivo, Simples Naci
 <h2>Como conectar</h2>
 <p>URL do servidor (Streamable HTTP): <code>${origem}/mcp</code></p>
 <p>Claude Code:</p><pre>claude mcp add --transport http calculadora-rtc ${origem}/mcp</pre>
-<p>Outros clientes: adicione um servidor MCP remoto com a URL acima. Não há login.</p>
+<p>Claude Desktop e claude.ai: em Configurações &gt; Conectores, adicione um conector personalizado com a URL acima.</p>
+<p>Cursor: em <code>.cursor/mcp.json</code>:</p><pre>{"mcpServers":{"calculadora-rtc":{"url":"${origem}/mcp"}}}</pre>
+<p>Qualquer outro cliente MCP com Streamable HTTP: informe a mesma URL. Não há login.</p>
 <p>Limite: 60 requisições por minuto por IP. Este servidor não calcula tributos.</p>
 <p><a href="/privacidade">Privacidade</a> · Projeto não oficial: não é mantido nem endossado pela Receita Federal ou pelo Serpro.</p>`,
   );

@@ -115,6 +115,12 @@ Também existe uma versão hospedada, só de consulta: classificações, anexos 
 claude mcp add --transport http calculadora-rtc https://<url-do-worker>/mcp
 ```
 
+Outros clientes:
+
+- **Claude Desktop e claude.ai:** em Configurações > Conectores, adicione um conector personalizado com a URL `https://<url-do-worker>/mcp`.
+- **Cursor:** em `.cursor/mcp.json`, use `{"mcpServers":{"calculadora-rtc":{"url":"https://<url-do-worker>/mcp"}}}`.
+- **Qualquer outro cliente MCP com Streamable HTTP:** informe a mesma URL, sem autenticação.
+
 Não há login. O limite é de 60 requisições por minuto por IP. O PDF do DANFSe fica disponível por 1 hora e o XML não é guardado. Os logs guardam apenas o padrão da rota, o status e a duração (veja `/privacidade` no próprio servidor).
 
 Desenvolvimento local, depois de gerar `site/data` com `node scripts/export-site-data.mjs`:
