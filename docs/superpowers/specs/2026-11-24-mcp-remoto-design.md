@@ -137,7 +137,7 @@ A NBS tem a tabela `EXCECAO_NBS_APLICAVEL`, vazia na base V0073. Mesmo assim, o 
   - limite de tamanho do XML;
   - `/pdf/:id` expirado retorna 404;
   - um `initialize` seguido de `tools/list` no `/mcp`.
-- **Paridade** (`test/paridade.mjs`, no CI depois de subir as APIs): para cada classificação com anexo, testa um código aceito, um código de exceção (quando houver) e um código fora do anexo. Exige o mesmo veredito de `GET /calculadora/dados-abertos/classificacoes-tributarias/ncm-aplicavel` (ou `nbs-aplicavel`).
+- **Paridade** (`test/paridade.test.ts`, só com `RTC_PARIDADE_URL`, no CI depois de subir as APIs): para cada classificação com anexo, testa cada prefixo completado com zeros, cada exceção e um código fora do anexo (só noves). Exige o mesmo veredito de `GET /calculadora/dados-abertos/classificacoes-tributarias/ncm-aplicavel` (ou `nbs-aplicavel`).
 - **Fumaça do DANFSe**: com `wrangler dev` nos dois Workers, gera o PDF de `examples/nfse-ficticia.xml` e confere o cabeçalho `%PDF`.
 
 ## CI e deploy

@@ -93,14 +93,17 @@ Para montar o JSON da Calculadora ou explicar a resposta, siga o formato de `ref
 
 ## Ferramentas opcionais
 
-Se o agente do usuário tiver o servidor MCP **calculadora-rtc** conectado (ferramentas `rtc_*`), prefira as ferramentas às contas na mão. Há duas versões. A **remota** só faz consultas: `rtc_buscar_classificacoes`, `rtc_consultar_classificacao`, `rtc_validar_nomenclatura`, `rtc_consultar_nomenclatura`, `rtc_explicar_erro`, `rtc_atividades_simples`, `rtc_municipio` e `rtc_gerar_danfse`. A **local**, que roda as APIs oficiais na máquina do usuário, também calcula (`rtc_calcular_regime_geral`, `rtc_calcular_simples_nacional`) e gera e valida XML (`rtc_gerar_xml`, `rtc_validar_xml`).
-- `rtc_validar_nomenclatura`: confere NCM/NBS contra a classificação;
-- `rtc_calcular_regime_geral` e `rtc_calcular_simples_nacional`: calculam;
-- `rtc_explicar_erro`: explica códigos de erro;
-- `rtc_gerar_xml` e `rtc_validar_xml`: geram e validam o XML contra o XSD oficial;
-- `rtc_gerar_danfse`: gera o PDF do DANFSe.
+Se o agente do usuário tiver o servidor MCP **calculadora-rtc** conectado (ferramentas `rtc_*`), prefira as ferramentas às contas na mão. Ele existe em duas versões:
 
-Elas rodam na máquina do próprio usuário, com o código oficial da Receita. Sem elas, esta skill funciona só com os arquivos de referência. Nunca peça ao usuário para instalar nada sem que ele queira.
+- **Remota** (hospedada, sem instalar nada): só consultas e DANFSe.
+  - `rtc_buscar_classificacoes`, `rtc_consultar_classificacao`, `rtc_validar_nomenclatura` e `rtc_consultar_nomenclatura`: classificações e anexos de NCM/NBS;
+  - `rtc_explicar_erro`, `rtc_atividades_simples` e `rtc_municipio`;
+  - `rtc_gerar_danfse`: devolve um link para o PDF que vale 1 hora. O XML não é guardado.
+- **Local** (APIs oficiais rodando na máquina do usuário): tudo o que a remota faz, mais:
+  - `rtc_calcular_regime_geral` e `rtc_calcular_simples_nacional`: calculam;
+  - `rtc_gerar_xml` e `rtc_validar_xml`: geram e validam o XML contra o XSD oficial.
+
+Se uma ferramenta de cálculo ou de XML não estiver disponível, o usuário está na versão remota. Nesse caso, faça a conta na mão seguindo esta skill. Sem nenhuma das duas versões, a skill funciona só com os arquivos de referência. Nunca peça ao usuário para instalar nada sem que ele queira.
 
 ## Estilo das respostas
 
