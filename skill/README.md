@@ -43,6 +43,7 @@ node scripts/build-skill.mjs
 | Atendimento | `atendimento-clientes-contabilidade` | — |
 | Atendimento | `proposta-honorarios` | — |
 | Atendimento | `onboarding-cliente` | — |
+| Design (pequenos negócios) | `design-sites-pmes` | — |
 
 ## Princípio comum
 
