@@ -11,6 +11,7 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { DatabaseSync } from "node:sqlite";
+import { extrairErros } from "./lib/erros.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const out = path.join(root, "site", "data");
@@ -107,14 +108,16 @@ for (const r of db
 }
 for (const r of db
   .prepare(
-    `SELECT c.CLTR_CD cls, n.NBSA_NBS_CD cod, ${ehIs}
+    `SELECT c.CLTR_CD cls, n.NBSA_NBS_CD cod, ${ehIs},
+            (SELECT group_concat(e.ENBS_NBS_CD) FROM EXCECAO_NBS_APLICAVEL e WHERE e.ENBS_NBSA_ID = n.NBSA_ID AND ${vigente("e.ENBS", dataNom)}) exc
        FROM NBS_APLICAVEL n JOIN CLASSIFICACAO_TRIBUTARIA c ON c.CLTR_ID = n.NBSA_CLTR_ID
       WHERE ${vigente("n.NBSA", dataNom)} ORDER BY 1, 2`,
   )
   .all()) {
-  ((destino(r)[r.cls] ??= { ncm: [], nbs: [] }).nbs).push([r.cod]);
+  ((destino(r)[r.cls] ??= { ncm: [], nbs: [] }).nbs).push(r.exc ? [r.cod, r.exc.split(",")] : [r.cod]);
 }
 await save("vinculos-nomenclatura.json", { data: dataNom, vinculos, vinculosIs });
+await save("erros.json", extrairErros(root));
 
 const ufs = db.prepare("SELECT UF_CD cod, UF_SIGLA sigla, UF_NOME nome FROM UF ORDER BY UF_SIGLA").all();
 const municipios = db

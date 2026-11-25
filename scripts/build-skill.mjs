@@ -2,9 +2,10 @@
 // Gera os arquivos de referência da skill (skill/reforma-tributaria-ibs-cbs/reference/*.md)
 // a partir de site/data/*.json e dos catálogos de erro do código oficial em upstream/.
 // Rode depois de scripts/export-site-data.mjs:  node scripts/build-skill.mjs
-import { readFileSync, writeFileSync, mkdirSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { extrairErros } from "./lib/erros.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const data = (f) => JSON.parse(readFileSync(path.join(root, "site/data", f), "utf8"));
@@ -141,53 +142,23 @@ const corta = (s, n) => (s.length > n ? s.slice(0, n - 1).trimEnd() + "…" : s)
 
 // ------------------------------------------------------------------ códigos de erro
 {
-  const java = (dir, nome) => {
-    const walk = (d) =>
-      readdirSync(d, { withFileTypes: true }).flatMap((e) =>
-        e.isDirectory() ? walk(path.join(d, e.name)) : e.name === nome ? [path.join(d, e.name)] : [],
-      );
-    // Pode haver mais de um arquivo com o mesmo nome; fica o que contém o catálogo.
-    const f = walk(path.join(root, "upstream", dir, "src/main")).find((p) =>
-      /"(REG|VSN)-\d{3}"/.test(readFileSync(p, "utf8")),
-    );
-    if (!f) throw new Error(`${nome} não encontrado em upstream/${dir}`);
-    return readFileSync(f, "utf8");
-  };
-  const str = '"((?:[^"\\\\]|\\\\.)*)"';
-  const s = String.raw`\s*`;
-
-  // ProblemType.java: NOME(Excecao.class, "Título", "slug", new CodigoErro("REG-001", campo, Estado.X), "Descrição")
-  const reg = [];
-  const reProblem = new RegExp(
-    `${str}${s},${s}${str}${s},${s}new CodigoErro\\(${s}"([A-Z]{3}-\\d{3})"${s},${s}(?:"([^"]*)"|null)${s},${s}EstadoItemEnum\\.(\\w+)\\)${s},${s}${str}`,
-    "g",
-  );
-  for (const m of java("regime-regular", "ProblemType.java").matchAll(reProblem))
-    reg.push({ codigo: m[3], titulo: m[1], campo: m[4] ?? "", estado: m[5], descricao: m[6] });
-
-  // CodigoValidacaoSimples.java: NOME("VSN-001", "Título", "Descrição")
-  const vsn = [];
-  const reVsn = new RegExp(`"(VSN-\\d{3})"${s},${s}${str}${s},${s}${str}`, "g");
-  for (const m of java("simples-nacional", "CodigoValidacaoSimples.java").matchAll(reVsn))
-    vsn.push({ codigo: m[1], titulo: m[2], descricao: m[3] });
-
-  const ordena = (a, b) => a.codigo.localeCompare(b.codigo);
+  const todos = extrairErros(root);
   let md = cabecalho("Códigos de erro da Calculadora RTC");
   md +=
     "`estadoItem` diz o que fazer: **INCONSISTENCIA_ENTRADA** = corrigir os dados enviados; " +
     "**NAO_IMPLEMENTADO** = a classificação ainda não é calculada pela Calculadora (não é erro do usuário); " +
     "**FALHA_TECNICA** = problema na base ou na Calculadora, não nos dados.\n";
   for (const pref of ["REG", "CAL", "VAL"]) {
-    const lista = reg.filter((e) => e.codigo.startsWith(pref)).sort(ordena);
+    const lista = todos.filter((e) => e.codigo.startsWith(pref));
     if (!lista.length) continue;
     const nome = { REG: "regras de entrada", CAL: "cálculo", VAL: "validação" }[pref];
     md += `\n## ${pref} — ${nome} (regime regular)\n\n| Código | Erro | Campo | Estado | Significado |\n|---|---|---|---|---|\n`;
     for (const e of lista) md += `| ${e.codigo} | ${e.titulo} | ${e.campo} | ${e.estado} | ${e.descricao} |\n`;
   }
   md += `\n## VSN — Simples Nacional\n\n| Código | Erro | Significado |\n|---|---|---|\n`;
-  for (const e of vsn.sort(ordena)) md += `| ${e.codigo} | ${e.titulo} | ${e.descricao} |\n`;
+  for (const e of todos.filter((e) => e.codigo.startsWith("VSN"))) md += `| ${e.codigo} | ${e.titulo} | ${e.descricao} |\n`;
   writeFileSync(path.join(out, "erros.md"), md);
-  console.log(`erros: ${reg.length} do regime regular, ${vsn.length} do Simples`);
+  console.log(`erros: ${todos.length} códigos`);
 }
 
 console.log(`referências geradas em ${path.relative(root, out)}`);
