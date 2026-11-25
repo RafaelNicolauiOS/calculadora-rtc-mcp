@@ -16,3 +16,6 @@ site/examples/
 
 # pacote da skill para o Agensi (gerado por scripts/build-skill.mjs + zip)
 skill/*.zip
+
+# MCP remoto
+mcp-remote/node_modules/

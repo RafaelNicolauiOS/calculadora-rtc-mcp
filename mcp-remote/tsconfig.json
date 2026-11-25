@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noUncheckedSideEffectImports": false,
+    "types": ["@cloudflare/workers-types", "node"]
+  },
+  "include": ["src", "danfse/src", "test"]
+}

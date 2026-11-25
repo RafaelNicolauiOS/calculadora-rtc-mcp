@@ -1,0 +1,27 @@
+{
+  "name": "calculadora-rtc-mcp-remote",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP remoto (Cloudflare Workers) de consulta à Calculadora RTC. Projeto não oficial.",
+  "license": "MIT",
+  "scripts": {
+    "preparar": "node scripts/preparar.mjs",
+    "test": "npm run preparar && vitest run",
+    "typecheck": "tsc --noEmit",
+    "dev": "npm run preparar && wrangler dev -c wrangler.toml -c danfse/wrangler.toml",
+    "fumaca": "node test/fumaca.mjs",
+    "verificar-deploy": "npm run preparar && wrangler deploy --dry-run -c wrangler.toml --outdir .wrangler/dry && wrangler deploy --dry-run -c danfse/wrangler.toml --outdir .wrangler/dry-danfse"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20261125.1",
+    "@types/node": "26.6.6",
+    "typescript": "7.0.2",
+    "vitest": "5.1.1",
+    "wrangler": "4.168.0"
+  }
+}
