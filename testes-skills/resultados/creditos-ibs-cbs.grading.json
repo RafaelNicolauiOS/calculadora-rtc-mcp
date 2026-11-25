@@ -1,0 +1,28 @@
+{
+  "skill": "creditos-ibs-cbs",
+  "expectations": [
+    {
+      "text": "Classifica a matéria-prima (item 1) como crédito integral",
+      "passed": true,
+      "evidence": "Item 1: 'Credito integral (CBS e IBS destacados na nota)'."
+    },
+    {
+      "text": "Diz que o crédito da compra do Simples (item 2) fica limitado ao IBS/CBS pago no DAS, salvo opção por fora",
+      "passed": true,
+      "evidence": "Item 2: 'O credito fica restrito ao IBS/CBS pago dentro do DAS ... Se o fornecedor optou por recolher IBS/CBS por fora (regime regular), o credito passa a ser integral.'"
+    },
+    {
+      "text": "Aponta restrição de crédito para o vinho dos diretores (uso e consumo pessoal / bebidas alcoólicas), recomendando confirmar o rol na LC 214/2025",
+      "passed": true,
+      "evidence": "Item 3: 'Sem credito (provavel), a confirmar ... uso ou consumo pessoal ... e bebida alcoolica, sofre restricao na LC 214/2025 ... Confirme o rol exato e o artigo na lei'."
+    },
+    {
+      "text": "Menciona a condição de extinção do débito (pagamento/split payment) para o crédito",
+      "passed": true,
+      "evidence": "'o credito depende de o debito da operacao anterior ser extinto (pagamento, inclusive por split payment)'."
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [],
+  "skill_fixes": []
+}

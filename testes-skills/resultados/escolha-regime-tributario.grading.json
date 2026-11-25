@@ -1,0 +1,49 @@
+{
+  "skill": "escolha-regime-tributario",
+  "expectations": [
+    {
+      "text": "Calcula o Fator R (180 / 900 = 20%) e conclui que no Simples ficaria no Anexo V se a atividade for sujeita ao Fator R",
+      "passed": true,
+      "evidence": "'Com o pro-labore de R$ 180 mil/ano (20% da receita), a empresa cai no Anexo V'; premissa 'servico de TI ... sujeito ao Fator R. Confirmar o CNAE.'"
+    },
+    {
+      "text": "Simula o Lucro Presumido com presunção de 32% para IRPJ e CSLL de serviços",
+      "passed": true,
+      "evidence": "'Presumido: presuncao de 32%' com IRPJ 48.000 e CSLL 25.920 (calculos conferidos)."
+    },
+    {
+      "text": "Não inventa as alíquotas do Simples: pede a tabela/alíquota efetiva ou explicita a premissa",
+      "passed": true,
+      "evidence": "Explicita a premissa: 'aliquotas pela formula ... com as tabelas dos Anexos III e V da LC 123/2006. Confirmar as tabelas vigentes'. Os valores usados (20,5%/17.100 e 16%/35.640) sao os da LC 123, mas vieram de memoria, contra a regra da skill ('Nao invente as tabelas do Simples. Peca...')."
+    },
+    {
+      "text": "Menciona a substituição de PIS/COFINS pela CBS a partir de 2027",
+      "passed": true,
+      "evidence": "Secao 'Reforma Tributaria': 'Presumido e Real: PIS/COFINS dao lugar a CBS'."
+    },
+    {
+      "text": "Dá recomendação com premissas e pendências",
+      "passed": true,
+      "evidence": "'Resposta curta' com recomendacao (Simples no Anexo III com Fator R), secoes de premissas, riscos e pendencias."
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [
+    "Inventa o municipio ('em Belo Horizonte') e usa ISS de 3% sem que o pedido informe a cidade; a ressalva de confirmar a aliquota nao corrige a premissa inventada.",
+    "Empresa sendo aberta em novembro/2026: o primeiro ano completo e 2027, quando PIS/COFINS ja estao extintos. A tabela base do Presumido e do Real usa PIS/COFINS (32.850 e 83.250) e trata a CBS so de forma qualitativa, quando a skill manda trocar PIS/COFINS pela CBS nas premissas de 2027 em diante. A comparacao numerica favorece indevidamente o Presumido.",
+    "Prazo de opcao do Simples para empresa nova: o texto diz 'teto de 180 dias do CNPJ'. Pela Resolucao CGSN 140/2018 (art. 6o), o limite e de 60 dias da abertura do CNPJ, dentro dos 30 dias do ultimo deferimento de inscricao. Confianca moderada; a resposta ressalva 'Confirmar o calendario vigente'.",
+    "Usa as tabelas do Simples de memoria (valores corretos), contra a instrucao da skill."
+  ],
+  "skill_fixes": [
+    {
+      "prioridade": 5,
+      "problema": "O executor ignorou a regra de usar a CBS nos numeros de 2027, inventou o municipio e errou a janela de opcao do Simples para empresa nova; a skill so fala em 'janeiro'.",
+      "alteracao": "Em 'Simulacao', acrescentar: \"Se o ano simulado for 2027 ou posterior (inclusive empresa aberta no fim de 2026), a tabela principal deve usar a CBS no lugar de PIS/COFINS no Presumido e no Real, com aliquota declarada como hipotese; PIS/COFINS so entram em coluna de comparacao com 2026. Nao suponha UF ou municipio que o usuario nao informou: deixe a aliquota de ISS/ICMS como parametro.\" Em 'Saida', substituir o item 'Prazo' por: \"Prazo: empresa ja existente opta pelo Simples em janeiro; empresa em inicio de atividade, em ate 30 dias do ultimo deferimento de inscricao (municipal ou estadual), sem ultrapassar 60 dias da abertura no CNPJ (Resolucao CGSN 140/2018, art. 6o; confirme a redacao vigente). Presumido ou Real: com o primeiro pagamento do ano ou do inicio da atividade.\""
+    },
+    {
+      "prioridade": 8,
+      "problema": "A regra 'Nao invente as tabelas do Simples' e descumprida na pratica (aqui e em fator-r-pro-labore) porque, sem tabela, a skill nao consegue entregar a comparacao pedida. As tabelas dos anexos estao na propria LC 123/2006 e nao sao 'inventadas', mas a skill nao diz como usa-las.",
+      "alteracao": "Substituir o paragrafo 'Nao invente as tabelas do Simples...' por: \"Peca a aliquota efetiva do PGDAS-D ou a RBT12. Se o usuario nao fornecer e a resposta depender delas, voce pode usar as tabelas dos Anexos I a V da LC 123/2006 (redacao da LC 155/2016) desde que: (a) diga que sao as tabelas da lei usadas como premissa, (b) mostre a faixa, a aliquota nominal e a parcela a deduzir usadas, e (c) peca a confirmacao com o PGDAS-D. Nunca use percentuais de reparticao (pCBSSN/pIBSSN etc.) de memoria.\" Aplicar o mesmo texto em fator-r-pro-labore/SKILL.md, secao 'Entradas'."
+    }
+  ]
+}

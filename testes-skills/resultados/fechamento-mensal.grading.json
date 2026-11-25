@@ -1,0 +1,33 @@
+{
+  "skill": "fechamento-mensal",
+  "expectations": [
+    {
+      "text": "Aponta o caixa com saldo credor como erro",
+      "passed": true,
+      "evidence": "Achado 1: 'Caixa ... 1.200,00 credor | Caixa nao pode ficar credor'."
+    },
+    {
+      "text": "Aponta clientes com saldo credor (possível adiantamento mal classificado)",
+      "passed": true,
+      "evidence": "Achado 2: 'Saldo credor em clientes costuma ser adiantamento recebido'."
+    },
+    {
+      "text": "Aponta ICMS a recolher com saldo devedor (natureza invertida)",
+      "passed": true,
+      "evidence": "Achado 3: 'ICMS a recolher | 2.300,00 devedor | Passivo com saldo devedor'."
+    },
+    {
+      "text": "Aponta a falta de provisão de férias e de depreciação no mês",
+      "passed": true,
+      "evidence": "Achados 4 e 5: provisao de ferias zerada com 6 funcionarios e depreciacao sem movimento."
+    },
+    {
+      "text": "Sugere lançamentos ou pendências para cada achado",
+      "passed": true,
+      "evidence": "Coluna 'Ajuste sugerido' por achado, secao 3 de pendencias e secao 4 com lancamentos (partidas corretas, ex.: D Clientes / C Adiantamentos de clientes)."
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [],
+  "skill_fixes": []
+}

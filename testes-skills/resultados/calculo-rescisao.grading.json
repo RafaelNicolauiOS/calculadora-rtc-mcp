@@ -1,0 +1,41 @@
+{
+  "skill": "calculo-rescisao",
+  "expectations": [
+    {
+      "text": "Calcula o aviso prévio de 42 dias (30 + 3 x 4 anos completos)",
+      "passed": true,
+      "evidence": "'Aviso previo proporcional (Lei 12.506/2011): 30 + 3 x 4 = 42 dias'."
+    },
+    {
+      "text": "Projeta o contrato pelo aviso indenizado para férias e 13º proporcionais",
+      "passed": true,
+      "evidence": "'Data projetada do desligamento: 15/08/2027 + 42 dias = 26/09/2027. A projecao vale para ferias e 13o proporcionais.' Avos 7/12 e 9/12 corretos."
+    },
+    {
+      "text": "Inclui férias vencidas + 1/3, férias proporcionais + 1/3, 13º proporcional e saldo de salário",
+      "passed": true,
+      "evidence": "Saldo de salario 2.000,00, ferias vencidas 4.000,00 + 1/3, ferias proporcionais 7/12 + 1/3, 13o 9/12. Total 19.044,44 conferido."
+    },
+    {
+      "text": "Inclui a multa de 40% do FGTS e o prazo de pagamento de 10 dias (art. 477 §6º)",
+      "passed": false,
+      "evidence": "Inclui a multa de 40% (formula sobre o extrato + deposito rescisorio) e cita o art. 477, par. 6o, mas conta os 10 dias da data projetada: 'O contrato termina em 26/09/2027 ... O prazo e ate 06/10/2027.' Com aviso indenizado, o prazo corre do afastamento (ultimo dia trabalhado, 15/08/2027), ou seja, ate 25/08/2027. A projecao do aviso vale para avos e para a data de saida na CTPS (OJ 82 da SDI-1 do TST), nao para o prazo de pagamento. O prazo errado expoe o empregador a multa do par. 8o."
+    },
+    {
+      "text": "Não aplica tabelas de INSS/IRRF de memória: pede ou deixa como pendência",
+      "passed": true,
+      "evidence": "'Os descontos de INSS e IRRF nao foram calculados. Eles dependem das tabelas vigentes ... e eu nao uso valores de memoria.'"
+    }
+  ],
+  "pass_rate": 0.8,
+  "extra_issues": [
+    "Prazo de pagamento calculado a partir da data projetada (06/10/2027 em vez de 25/08/2027), erro com consequencia financeira direta (multa do art. 477, par. 8o, de um salario)."
+  ],
+  "skill_fixes": [
+    {
+      "prioridade": 2,
+      "problema": "A skill diz 'em ate 10 dias contados do termino do contrato' e, logo antes, que o aviso indenizado 'projeta o contrato'; o executor juntou as duas coisas e contou o prazo da data projetada.",
+      "alteracao": "Na secao 'Saida', substituir o item 'Prazo' por: \"Prazo: pagamento das verbas e entrega dos documentos em ate 10 dias corridos contados do termino do contrato (art. 477, par. 6o, da CLT). Com aviso previo indenizado, o termino para esse prazo e o dia do afastamento (ultimo dia trabalhado), NAO a data projetada: a projecao serve so para os avos de ferias e 13o e para a data de saida anotada na CTPS. Exemplo: afastamento em 15/08, prazo ate 25/08. O atraso gera a multa do par. 8o.\""
+    }
+  ]
+}

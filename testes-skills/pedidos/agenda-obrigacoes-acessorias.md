@@ -1,0 +1,1 @@
+Monta a agenda de junho/2027 desses clientes: (1) Padaria do Zé, Simples Nacional, comércio, SP capital, 4 funcionários; (2) Tech Ltda, Lucro Presumido, serviços de software, Curitiba, 10 funcionários, sem ICMS.

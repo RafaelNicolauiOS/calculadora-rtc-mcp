@@ -1,0 +1,28 @@
+{
+  "skill": "conciliacao-nfe-entradas",
+  "expectations": [
+    {
+      "text": "Aponta a nota 0002 como não escriturada",
+      "passed": true,
+      "evidence": "'...0002 | FORN B | 320,00 | nao consta | Nao escriturada'."
+    },
+    {
+      "text": "Aponta a nota 0003 como cancelada mas escriturada (estornar)",
+      "passed": true,
+      "evidence": "'...0003 ... Cancelada mas escriturada | Estornar o lancamento'."
+    },
+    {
+      "text": "Aponta a nota 0004 com divergência de valor (2.000 x 2.200) e lançamento em duplicidade",
+      "passed": true,
+      "evidence": "'...0004 ... Divergencia de valor (200,00 a mais no livro)' e linha seguinte 'Duplicidade'."
+    },
+    {
+      "text": "Aponta a 0009 como escriturada sem XML/nota destinada correspondente",
+      "passed": true,
+      "evidence": "'...0009 | (nao consta nas destinadas) ... Escriturada sem XML'."
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [],
+  "skill_fixes": []
+}

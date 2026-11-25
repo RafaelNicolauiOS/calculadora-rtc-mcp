@@ -1,0 +1,28 @@
+{
+  "skill": "atendimento-clientes-contabilidade",
+  "expectations": [
+    {
+      "text": "Mensagem curta, adequada ao WhatsApp",
+      "passed": true,
+      "evidence": "Versao WhatsApp com 3 paragrafos curtos."
+    },
+    {
+      "text": "Explica o DAS em linguagem simples, com valor e vencimento",
+      "passed": true,
+      "evidence": "'DAS de maio (o imposto do Simples sobre o seu faturamento do mes): R$ 2.340,00, com vencimento dia 20'."
+    },
+    {
+      "text": "Cobra os extratos de maio dizendo por que são necessários",
+      "passed": true,
+      "evidence": "'ainda preciso dos extratos bancarios de maio ... Sem eles, nao consigo conferir tudo e o fechamento atrasa.'"
+    },
+    {
+      "text": "Antecipa o motivo do aumento (faturamento maior)",
+      "passed": true,
+      "evidence": "'Ele veio um pouco maior que o do mes passado porque a padaria faturou mais'."
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [],
+  "skill_fixes": []
+}

@@ -1,0 +1,227 @@
+[
+  {
+    "skill": "classificador-cadastro-produtos",
+    "prompt": "Sou de um escritório contábil. Cliente é um mercadinho no regime regular (Lucro Presumido), emite NF-e e NFC-e, vende para consumidor final. Classifica esse cadastro pra reforma (CST e cClassTrib), quero a tabela pro ERP:\n\ndescricao;ncm\nARROZ BRANCO TIPO 1 5KG;10063021\nCERVEJA LATA 350ML;22030000\nSABAO EM PO 1KG;34022000\nFEIJAO CARIOCA 1KG;07133319\nREFRIGERANTE COLA 2L;22021000\nKIT PRESENTE DIVERSOS;9999",
+    "assertions": [
+      "Classifica o arroz (10063021) e o feijão (07133319) com cClassTrib 200003 (cesta básica, redução de 100%)",
+      "Usa 000001 para itens sem tratamento diferenciado, como o sabão em pó",
+      "Marca a cerveja (2203) e o refrigerante (22021000) como sujeitos ao Imposto Seletivo a partir de 2027",
+      "Coloca o item 'KIT PRESENTE DIVERSOS' com NCM 9999 na fila de revisão por NCM incompleto/inválido",
+      "Entrega a tabela com colunas de CST, cClassTrib, confiança e justificativa"
+    ]
+  },
+  {
+    "skill": "revisor-notas-rejeitadas",
+    "prompt": "A calculadora devolveu isso pra uma nota de venda de carne bovina, o que eu corrijo?\n\n{\"nObj\":4,\"estadoItem\":\"INCONSISTENCIA_ENTRADA\",\"erros\":[{\"code\":\"REG-011\",\"title\":\"NCM não vinculada\",\"pointer\":\"#/itens/3/ncm\",\"detail\":\"NCM de código 02013000 não vinculada à Classificação Tributária de código 200035 (CBS e IBS)\"}]}",
+    "assertions": [
+      "Explica que REG-011 significa NCM fora do anexo da cClassTrib informada",
+      "Identifica que o pointer itens/3 é o 4º item da nota",
+      "Propõe uma classificação alternativa consultando o anexo (por exemplo 200003 se 0201 estiver no anexo da cesta básica) ou orienta voltar para 000001, sem inventar código inexistente",
+      "Diz que é um erro de cadastro (corrigir no ERP) e não só da nota"
+    ]
+  },
+  {
+    "skill": "simulador-transicao-reforma",
+    "prompt": "Cliente: escola de idiomas, Lucro Presumido, faturamento R$ 1,2 milhão/ano só de serviço, ISS 2%, PIS/COFINS cumulativo (3,65%). Compras com crédito são uns R$ 150 mil/ano. Quero simular a carga de 2026 a 2033 pra apresentar pra ele.",
+    "assertions": [
+      "Apresenta a tabela ano a ano de 2026 a 2033",
+      "Não afirma alíquotas definitivas de CBS/IBS a partir de 2027: usa cenários declarados como hipótese ou pede ao usuário",
+      "Verifica se cursos de idiomas têm direito à redução de 60% da educação (200028), sem afirmar o benefício sem checar a referência ou o anexo",
+      "Lista as premissas usadas e o que precisa ser confirmado"
+    ]
+  },
+  {
+    "skill": "simples-nacional-reforma",
+    "prompt": "Meu cliente é do Simples, fabrica peças e vende só pra indústrias do Lucro Real. Os clientes dele estão reclamando que não vão ter crédito de IBS/CBS. Vale a pena ele recolher IBS/CBS por fora? Faturamento de R$ 200 mil/mês.",
+    "assertions": [
+      "Explica que dentro do DAS o crédito do comprador fica limitado ao valor pago no Simples",
+      "Compara os dois cenários (dentro do DAS e por fora) e conclui pelo perfil B2B do cliente",
+      "Não inventa as alíquotas efetivas do Simples (pCBSSN/pIBSSN): pede ao usuário ou deixa como parâmetro",
+      "Menciona que a opção tem prazos/janelas a confirmar"
+    ]
+  },
+  {
+    "skill": "creditos-ibs-cbs",
+    "prompt": "Empresa no Lucro Real, competência março/2027. Quais dessas entradas dão crédito de IBS/CBS?\n1) Compra de matéria-prima de fornecedor do regime regular, NF-e com CBS e IBS destacados, cClassTrib 000001\n2) Compra de material de escritório de fornecedor do Simples Nacional\n3) Compra de 12 garrafas de vinho para presentear os diretores\n4) Conta de energia elétrica da fábrica",
+    "assertions": [
+      "Classifica a matéria-prima (item 1) como crédito integral",
+      "Diz que o crédito da compra do Simples (item 2) fica limitado ao IBS/CBS pago no DAS, salvo opção por fora",
+      "Aponta restrição de crédito para o vinho dos diretores (uso e consumo pessoal / bebidas alcoólicas), recomendando confirmar o rol na LC 214/2025",
+      "Menciona a condição de extinção do débito (pagamento/split payment) para o crédito"
+    ]
+  },
+  {
+    "skill": "conferencia-sped-efd",
+    "prompt": "Confere esse trecho do SPED Fiscal antes de eu transmitir:\n|C100|1|0|FORN01|55|00|1|1234||01032027|01032027|1000,00|0|0|0|1000,00|0|0|0|0|1000,00|180,00|0|0|0|0|0|0|0|\n|C170|1|PROD1|PECA|10|UN|500,00|0|0|000|1102|001|500,00|18,00|90,00|0|0|0|0|||0|0||||0|0|0|0|0|0|0|0|0|0|0|\n|C170|2|PROD2|PECA|5|UN|400,00|0|0|000|1102|001|400,00|18,00|72,00|0|0|0|0|||0|0||||0|0|0|0|0|0|0|0|0|0|0|\n|C190|000|1102|18,00|1000,00|1000,00|180,00|0|0|0|0||",
+    "assertions": [
+      "Detecta que a soma dos itens C170 (500 + 400 = 900) não bate com o valor do documento C100 (1000)",
+      "Detecta que o ICMS dos itens (90 + 72 = 162) não bate com o ICMS do C100/C190 (180)",
+      "Aponta o C190 como inconsistente com os C170",
+      "Apresenta os achados classificados por gravidade com a correção sugerida"
+    ]
+  },
+  {
+    "skill": "conciliacao-nfe-entradas",
+    "prompt": "Notas destinadas ao CNPJ do cliente em maio (chave final, emitente, valor):\n...0001 FORN A 1.500,00\n...0002 FORN B 320,00\n...0003 FORN C 9.800,00 (cancelada)\n...0004 FORN D 2.000,00\n\nLivro de entradas (chave final, valor):\n...0001 1.500,00\n...0003 9.800,00\n...0004 2.200,00\n...0004 2.200,00\n...0009 450,00\n\nConcilia pra mim.",
+    "assertions": [
+      "Aponta a nota 0002 como não escriturada",
+      "Aponta a nota 0003 como cancelada mas escriturada (estornar)",
+      "Aponta a nota 0004 com divergência de valor (2.000 x 2.200) e lançamento em duplicidade",
+      "Aponta a 0009 como escriturada sem XML/nota destinada correspondente"
+    ]
+  },
+  {
+    "skill": "agenda-obrigacoes-acessorias",
+    "prompt": "Monta a agenda de junho/2027 desses clientes: (1) Padaria do Zé, Simples Nacional, comércio, SP capital, 4 funcionários; (2) Tech Ltda, Lucro Presumido, serviços de software, Curitiba, 10 funcionários, sem ICMS.",
+    "assertions": [
+      "Inclui PGDAS-D/DAS, eSocial, DCTFWeb e FGTS Digital para a padaria",
+      "Inclui DCTFWeb, EFD-Reinf, EFD-Contribuições, eSocial, FGTS Digital e o ISS municipal para a Tech, e não inclui EFD ICMS/IPI",
+      "Marca as datas de vencimento como a confirmar (ou indica a fonte oficial) em vez de apresentá-las como definitivas",
+      "Entrega em formato de tabela com cliente, obrigação, vencimento, responsável e status"
+    ]
+  },
+  {
+    "skill": "iss-retencao",
+    "prompt": "Empresa de vigilância com sede em Campinas presta serviço de vigilância num condomínio comercial em São Paulo (tomador PJ). Prestador é do Lucro Presumido. Onde é devido o ISS e o tomador retém?",
+    "assertions": [
+      "Diz que vigilância está entre as exceções do art. 3º da LC 116/2003 e o ISS é devido no local da prestação (São Paulo)",
+      "Indica que o tomador PJ tende a ser responsável pela retenção (art. 6º), recomendando confirmar na lei municipal",
+      "Não inventa a alíquota de ISS de São Paulo como certa: pede ou indica onde confirmar",
+      "Dá uma conclusão objetiva seguida do raciocínio em passos"
+    ]
+  },
+  {
+    "skill": "conciliacao-bancaria",
+    "prompt": "Extrato do banco (junho):\n03/06 TARIFA PACOTE -89,90\n05/06 PIX RECEBIDO CLIENTE ALFA 3.000,00\n10/06 PAG BOLETO FORN BETA -1.250,00\n12/06 IOF -4,32\n15/06 TED RECEBIDA LOTE CARTAO 5.430,00\n\nRazão da conta banco:\n05/06 Recebimento Alfa 3.000,00\n11/06 Pagamento Beta -1.250,00\n15/06 Recebimento cartão 2.430,00\n15/06 Recebimento cartão 3.000,00\n20/06 Pagamento aluguel -2.000,00\n\nFaz a conciliação.",
+    "assertions": [
+      "Concilia o pagamento Beta mesmo com 1 dia de diferença",
+      "Concilia o crédito de 5.430 com a soma dos dois recebimentos de cartão (um para muitos)",
+      "Aponta tarifa e IOF como sem lançamento e sugere despesas financeiras",
+      "Aponta o pagamento de aluguel de 20/06 como lançamento sem movimento no extrato",
+      "Apresenta a demonstração da conciliação de saldos ou a diferença residual"
+    ]
+  },
+  {
+    "skill": "classificador-lancamentos",
+    "prompt": "Plano de contas: 1.1.1.02 Banco Itaú; 1.1.2.01 Clientes; 2.1.1.01 Fornecedores; 2.1.3.01 Impostos a recolher; 2.3.1.01 Lucros a distribuir; 3.1.1.01 Receita de serviços; 4.2.1.01 Aluguel; 4.2.1.05 Tarifas bancárias; 4.2.1.09 Energia.\nO cliente provisiona fornecedores.\nMovimentos do extrato:\n02/07 PIX ENVIADO JOAO SOCIO 5.000,00 (saída)\n05/07 DEBITO CEMIG 410,00 (saída)\n08/07 PAG FORN MADEIRAS SA 3.200,00 (saída)\n10/07 DAS SIMPLES 1.150,00 (saída)\n12/07 PIX RECEBIDO XYZ LTDA 7.000,00 (entrada)\nGera os lançamentos.",
+    "assertions": [
+      "Classifica o PIX para o sócio como retirada/lucros a distribuir, não como despesa",
+      "Classifica o pagamento ao fornecedor a débito de Fornecedores (provisionado), não de despesa",
+      "Usa apenas contas existentes no plano informado (energia 4.2.1.09, banco 1.1.1.02 etc.)",
+      "Gera lançamentos com débito, crédito, valor e histórico"
+    ]
+  },
+  {
+    "skill": "fechamento-mensal",
+    "prompt": "Balancete de agosto do cliente (Lucro Presumido):\nCaixa: saldo credor 1.200,00\nBancos: 45.000,00 devedor\nClientes: 3.000,00 credor\nFornecedores: 8.000,00 credor\nICMS a recolher: 2.300,00 devedor\nProvisão de férias: 0,00 (tem 6 funcionários)\nDepreciação acumulada: sem movimento no mês\nReceita: 120.000,00\nRevisa pra mim antes de fechar.",
+    "assertions": [
+      "Aponta o caixa com saldo credor como erro",
+      "Aponta clientes com saldo credor (possível adiantamento mal classificado)",
+      "Aponta ICMS a recolher com saldo devedor (natureza invertida)",
+      "Aponta a falta de provisão de férias e de depreciação no mês",
+      "Sugere lançamentos ou pendências para cada achado"
+    ]
+  },
+  {
+    "skill": "relatorio-gerencial-cliente",
+    "prompt": "DRE de setembro de uma loja de roupas: receita 210.000; CMV 118.000; despesas com pessoal 38.000; aluguel 12.000; marketing 9.000; outras despesas 6.000; impostos sobre venda 16.800. Agosto o lucro foi 22.000. Caixa caiu 15.000 no mês porque comprou estoque para o Natal. Faz o relatório pro dono.",
+    "assertions": [
+      "Calcula o lucro de setembro corretamente (210.000 - 118.000 - 38.000 - 12.000 - 9.000 - 6.000 - 16.800 = 10.200)",
+      "Compara com agosto (queda de 22.000 para 10.200)",
+      "Explica a diferença entre lucro e caixa pela compra de estoque",
+      "Usa linguagem simples e traz no máximo 3 recomendações práticas"
+    ]
+  },
+  {
+    "skill": "conferencia-folha",
+    "prompt": "Confere esse holerite de julho/2027: salário 3.000,00; 10 horas extras a 50% lançadas como 204,55; INSS descontado 300,00; FGTS 240,00. Jornada 44h semanais. Não te passei a tabela do INSS.",
+    "assertions": [
+      "Recalcula a hora extra com divisor 220 (3.000/220 x 1,5 x 10 = 204,55) e confirma o valor",
+      "Não aplica tabela de INSS de memória: pede a tabela vigente ou deixa a conferência do INSS pendente",
+      "Confere o FGTS de 8% sobre a remuneração incluindo a hora extra (e aponta que 240 considera só o salário, se for o caso)",
+      "Lista as tabelas/premissas usadas"
+    ]
+  },
+  {
+    "skill": "esocial-eventos-rejeitados",
+    "prompt": "Tentei enviar o S-1200 do funcionário CPF 123... e voltou erro dizendo que o trabalhador não está cadastrado no eSocial. A admissão foi mês passado. O que eu faço?",
+    "assertions": [
+      "Identifica a causa como dependência: falta o S-2200 (admissão) do trabalhador",
+      "Indica a ordem correta: enviar o S-2200 antes e depois reenviar o S-1200",
+      "Menciona efeitos colaterais (ex.: fechamento S-1299 e guias DCTFWeb/FGTS Digital)",
+      "Não inventa o significado de um código numérico que não foi informado"
+    ]
+  },
+  {
+    "skill": "calculo-rescisao",
+    "prompt": "Funcionário admitido em 10/03/2023, dispensa sem justa causa com aviso indenizado comunicada em 15/08/2027 (último dia trabalhado). Salário 4.000,00, sem variáveis. Nunca tirou férias do período 10/03/2026–09/03/2027 (as anteriores ele gozou). Calcula a rescisão.",
+    "assertions": [
+      "Calcula o aviso prévio de 42 dias (30 + 3 x 4 anos completos)",
+      "Projeta o contrato pelo aviso indenizado para férias e 13º proporcionais",
+      "Inclui férias vencidas + 1/3, férias proporcionais + 1/3, 13º proporcional e saldo de salário",
+      "Inclui a multa de 40% do FGTS e o prazo de pagamento de 10 dias (art. 477 §6º)",
+      "Não aplica tabelas de INSS/IRRF de memória: pede ou deixa como pendência"
+    ]
+  },
+  {
+    "skill": "escolha-regime-tributario",
+    "prompt": "Abrindo uma consultoria de TI, 2 sócios, faturamento previsto R$ 900 mil/ano, folha com pró-labore R$ 180 mil/ano, margem de lucro uns 40%. Simples, Presumido ou Real?",
+    "assertions": [
+      "Calcula o Fator R (180 / 900 = 20%) e conclui que no Simples ficaria no Anexo V se a atividade for sujeita ao Fator R",
+      "Simula o Lucro Presumido com presunção de 32% para IRPJ e CSLL de serviços",
+      "Não inventa as alíquotas do Simples: pede a tabela/alíquota efetiva ou explicita a premissa",
+      "Menciona a substituição de PIS/COFINS pela CBS a partir de 2027",
+      "Dá recomendação com premissas e pendências"
+    ]
+  },
+  {
+    "skill": "abertura-alteracao-empresa",
+    "prompt": "Uma cliente quer abrir uma clínica de estética sozinha em Belo Horizonte, vai fazer limpeza de pele e massagem, sem funcionários no início. Que tipo de empresa, CNAE e o que precisa?",
+    "assertions": [
+      "Recomenda natureza jurídica para titular único (SLU ou EI) e explica se MEI é ou não possível",
+      "Sugere CNAEs pela descrição pedindo confirmação na tabela oficial",
+      "Alerta para licença sanitária/vigilância sanitária da atividade",
+      "Lista as etapas (viabilidade, registro, CNPJ, inscrição municipal, alvará) e os documentos"
+    ]
+  },
+  {
+    "skill": "fator-r-pro-labore",
+    "prompt": "Empresa de engenharia no Simples. Receita dos últimos 12 meses: R$ 600.000. Folha dos últimos 12 meses (com pró-labore e encargos): R$ 120.000. Quanto de pró-labore a mais por mês ela precisa pra ir pro anexo III?",
+    "assertions": [
+      "Calcula o Fator R atual (120.000 / 600.000 = 20%)",
+      "Calcula a folha necessária para 28% (168.000 em 12 meses, ou seja, 48.000 a mais, cerca de 4.000/mês considerando encargos)",
+      "Compara o custo do pró-labore adicional (INSS/IRRF) com a economia no DAS, sem inventar as tabelas",
+      "Menciona as mudanças recentes na tributação de dividendos ao comparar com distribuição de lucros"
+    ]
+  },
+  {
+    "skill": "atendimento-clientes-contabilidade",
+    "prompt": "Escreve uma mensagem de WhatsApp pra Dona Maria (cliente, padaria) mandando o DAS de maio, R$ 2.340,00, vence dia 20, e cobrando os extratos bancários de maio que ela ainda não mandou. O DAS subiu porque ela faturou mais.",
+    "assertions": [
+      "Mensagem curta, adequada ao WhatsApp",
+      "Explica o DAS em linguagem simples, com valor e vencimento",
+      "Cobra os extratos de maio dizendo por que são necessários",
+      "Antecipa o motivo do aumento (faturamento maior)"
+    ]
+  },
+  {
+    "skill": "proposta-honorarios",
+    "prompt": "Prospecto: distribuidora de alimentos, Lucro Presumido, 350 notas de saída e 120 de entrada por mês, 18 funcionários, 2 filiais em estados diferentes, tem ST. Meu custo-hora é R$ 120 e trabalho com margem de 35%. Monta a proposta.",
+    "assertions": [
+      "Monta a memória de cálculo com horas por rotina, custo-hora de 120 e margem de 35%",
+      "Considera volume de notas, funcionários, filiais em UFs diferentes e ST como fatores de complexidade",
+      "Separa os serviços inclusos dos cobrados à parte",
+      "Entrega o texto da proposta pronto para enviar, com condições e validade"
+    ]
+  },
+  {
+    "skill": "onboarding-cliente",
+    "prompt": "Pegamos um cliente novo que veio de outro contador: comércio no Simples Nacional, 5 funcionários, em Recife. O que eu peço pra ele e pro contador antigo, e como organizo as primeiras semanas?",
+    "assertions": [
+      "Lista acessos e procurações (e-CAC, SEFAZ, prefeitura, eSocial/FGTS Digital) preferindo procuração a senhas",
+      "Lista o que pedir ao contador anterior (balancetes, SPEDs/declarações, folha/eSocial, parcelamentos)",
+      "Inclui o levantamento de certidões e pendências, com o risco de exclusão do Simples por débitos",
+      "Entrega um cronograma das primeiras semanas e uma mensagem de boas-vindas"
+    ]
+  }
+]

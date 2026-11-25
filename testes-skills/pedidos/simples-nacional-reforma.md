@@ -1,0 +1,1 @@
+Meu cliente é do Simples, fabrica peças e vende só pra indústrias do Lucro Real. Os clientes dele estão reclamando que não vão ter crédito de IBS/CBS. Vale a pena ele recolher IBS/CBS por fora? Faturamento de R$ 200 mil/mês.

@@ -1,0 +1,38 @@
+{
+  "skill": "iss-retencao",
+  "expectations": [
+    {
+      "text": "Diz que vigilância está entre as exceções do art. 3º da LC 116/2003 e o ISS é devido no local da prestação (São Paulo)",
+      "passed": false,
+      "evidence": "Conclui o oposto: 'o ISS e devido em Campinas ... O servico (vigilancia, item 11.02 da lista) nao aparece entre os incisos do art. 3o'. A LC 116/2003, art. 3o, preve o ISS no local 'dos bens, dos semoventes ou do domicilio das pessoas vigiados, segurados ou monitorados, no caso dos servicos descritos no subitem 11.02' (inciso XVI na redacao da LC 157/2016). O ISS e devido em Sao Paulo. A propria SKILL.md lista 'vigilancia' entre as excecoes."
+    },
+    {
+      "text": "Indica que o tomador PJ tende a ser responsável pela retenção (art. 6º), recomendando confirmar na lei municipal",
+      "passed": true,
+      "evidence": "'sim, em regra o tomador deve reter. O art. 6o, par. 2o, II, da LC 116/2003 preve a responsabilidade da pessoa juridica tomadora dos servicos do subitem 11.02 ... Confirme na legislacao de Sao Paulo e de Campinas.' (A conclusao vale, embora apoiada num local de incidencia errado.)"
+    },
+    {
+      "text": "Não inventa a alíquota de ISS de São Paulo como certa: pede ou indica onde confirmar",
+      "passed": true,
+      "evidence": "'Alíquota: da lei municipal, entre 2% e 5%. Nao afirmo a aliquota.'"
+    },
+    {
+      "text": "Dá uma conclusão objetiva seguida do raciocínio em passos",
+      "passed": true,
+      "evidence": "Secao 'Conclusao' seguida de 'Raciocinio' em 4 passos e 'O que confirmar'."
+    }
+  ],
+  "pass_rate": 0.75,
+  "extra_issues": [
+    "Erro juridico central: municipio de incidencia errado (Campinas em vez de Sao Paulo). A NFS-e orientada ('municipio de incidencia (Campinas, salvo estabelecimento em SP)') sairia errada, e o tomador que retivesse para Campinas ficaria exposto a cobranca de Sao Paulo.",
+    "O cenario descrito (tomador de SP retendo ISS devido a Campinas) e incoerente: a responsabilidade do art. 6o, par. 2o, II, existe justamente porque o imposto do 11.02 e devido no local da prestacao.",
+    "Disputa resolvida: a excecao existe (confianca alta, ~95%). Quanto ao numero do inciso, o usuario citou XIV; minha leitura e que e o inciso XVI (redacao da LC 157/2016), com confianca moderada (~75%). Conferir no texto compilado do Planalto. Nao altera a conclusao."
+  ],
+  "skill_fixes": [
+    {
+      "prioridade": 1,
+      "problema": "Mesmo com 'vigilancia' citada como exemplo de excecao, o executor negou a excecao. A skill so da exemplos genericos, sem os subitens, e sugere 'confirme' de um jeito que convida a reabrir a regra.",
+      "alteracao": "Substituir o bloco 'Excecoes' do Passo 1 por: \"**Excecoes (art. 3o, I a XXV, da LC 116/2003)**: o ISS e devido no local da execucao, dos bens ou do tomador para os subitens 3.05, 7.02, 7.04, 7.05, 7.09, 7.10, 7.11, 7.12, 7.16, 7.17, 7.18, 7.19, 11.01, 11.02 (vigilancia, seguranca ou monitoramento: local dos bens ou do domicilio das pessoas vigiadas), 11.04, item 12 (exceto 12.13), 16.01, 17.05, 17.10 e item 20. Se o subitem estiver nesta lista, a conclusao e a excecao: nao a negue nem a transforme em pendencia. O que fica a confirmar e so a lei municipal (aliquota e procedimento). Para os subitens 4.22, 4.23, 5.09, 10.04, 15.01 e 15.09 (LC 157/2016 e LC 175/2020), confirme a situacao vigente antes de concluir.\" No Passo 2, acrescentar: \"O art. 6o, par. 2o, II, atribui a responsabilidade ao tomador PJ (ainda que imune ou isento) dos subitens 3.05, 7.02, 7.04, 7.05, 7.09, 7.10, 7.12, 7.16, 7.17, 7.19, 11.02, 17.05 e 17.10, em favor do municipio onde o imposto e devido.\""
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "skill": "simples-nacional-reforma",
+  "expectations": [
+    {
+      "text": "Explica que dentro do DAS o crédito do comprador fica limitado ao valor pago no Simples",
+      "passed": true,
+      "evidence": "'Esse comprador so tem credito do IBS/CBS que o cliente paga dentro do DAS'; na tabela: 'Credito para o comprador: So p = pCBSSN + pIBSSN do preco'."
+    },
+    {
+      "text": "Compara os dois cenários (dentro do DAS e por fora) e conclui pelo perfil B2B do cliente",
+      "passed": true,
+      "evidence": "Tabela 'Dentro do DAS' x 'Por fora', logica do preco equivalente, e 'Vende para empresas do regime regular (o caso do seu cliente): ... A opcao por fora e a que mais protege a carteira.'"
+    },
+    {
+      "text": "Não inventa as alíquotas efetivas do Simples (pCBSSN/pIBSSN): pede ao usuário ou deixa como parâmetro",
+      "passed": true,
+      "evidence": "'Preciso dos dois percentuais do PGDAS-D'; a ilustracao usa 'p = 4%' marcada como 'Ilustracao ficticia, so para mostrar a mecanica'."
+    },
+    {
+      "text": "Menciona que a opção tem prazos/janelas a confirmar",
+      "passed": true,
+      "evidence": "'A janela e a periodicidade da opcao, que tem prazos proprios em regulamento. Confirme a vigente antes de decidir.'"
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [
+    "Disputa resolvida: reference/simples-atividades.md lista cAtivSN 01 ('Revenda de mercadorias, venda de mercadorias industrializadas pelo contribuinte') com Anexo 'I'. Pela LC 123/2006, art. 18, par. 4o, II, a venda de mercadorias industrializadas pelo contribuinte e tributada pelo Anexo II. O executor estava certo ao apontar a divergencia e pedir os pCBSSN/pIBSSN do anexo efetivamente usado no PGDAS-D. A coluna 'Anexo' da tabela da Calculadora agrupa revenda e industrializacao no mesmo codigo e nao deve ser lida como o anexo de calculo."
+  ],
+  "skill_fixes": [
+    {
+      "prioridade": 6,
+      "problema": "A referencia mostra cAtivSN 01 = Anexo I para industria, o que contradiz a LC 123 e pode levar a pedir/usar percentuais do anexo errado.",
+      "alteracao": "Em 'Calculo dentro do DAS', passo 1, acrescentar: \"Atencao ao cAtivSN 01: o codigo cobre revenda (Anexo I) e venda de mercadoria industrializada pelo proprio contribuinte, que pela LC 123/2006, art. 18, par. 4o, II, e tributada pelo Anexo II. A coluna 'Anexo' de simples-atividades.md reproduz a tabela da Calculadora e nao decide o anexo de calculo: para industria, peca os pCBSSN/pIBSSN do Anexo II apurados no PGDAS-D.\""
+    }
+  ]
+}

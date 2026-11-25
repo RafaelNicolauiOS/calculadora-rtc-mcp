@@ -1,0 +1,1 @@
+Prospecto: distribuidora de alimentos, Lucro Presumido, 350 notas de saída e 120 de entrada por mês, 18 funcionários, 2 filiais em estados diferentes, tem ST. Meu custo-hora é R$ 120 e trabalho com margem de 35%. Monta a proposta.
