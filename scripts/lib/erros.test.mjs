@@ -25,3 +25,10 @@ test("descrições VSN concatenadas em várias linhas saem inteiras", () => {
   const vsn002 = extrairErros(root).find((e) => e.codigo === "VSN-002");
   assert.match(vsn002.descricao, /até 2 casas decimais, sem notação científica\)\.$/);
 });
+
+test("escapes Java não vazam para títulos e descrições", () => {
+  for (const e of extrairErros(root)) {
+    assert.doesNotMatch(e.descricao, /\\"/, `${e.codigo} descrição`);
+    assert.doesNotMatch(e.titulo, /\\"/, `${e.codigo} título`);
+  }
+});

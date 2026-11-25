@@ -96,12 +96,19 @@ Para montar o JSON da Calculadora ou explicar a resposta, siga o formato de `ref
 Se o agente do usuário tiver o servidor MCP **calculadora-rtc** conectado (ferramentas `rtc_*`), prefira as ferramentas às contas na mão. Ele existe em duas versões:
 
 - **Remota** (hospedada, sem instalar nada): só consultas e DANFSe.
-  - `rtc_buscar_classificacoes`, `rtc_consultar_classificacao`, `rtc_validar_nomenclatura` e `rtc_consultar_nomenclatura`: classificações e anexos de NCM/NBS;
-  - `rtc_explicar_erro`, `rtc_atividades_simples` e `rtc_municipio`;
+  - `rtc_status`;
+  - `rtc_consultar_classificacao` e `rtc_buscar_classificacoes` (por `cst`, `texto`, `ncm` ou `nbs`);
+  - `rtc_validar_nomenclatura` e `rtc_consultar_nomenclatura`: anexos de NCM/NBS;
+  - `rtc_explicar_erro` (REG, CAL, VAL e VSN), `rtc_atividades_simples` e `rtc_municipio`;
   - `rtc_gerar_danfse`: devolve um link para o PDF que vale 1 hora. O XML não é guardado.
-- **Local** (APIs oficiais rodando na máquina do usuário): tudo o que a remota faz, mais:
-  - `rtc_calcular_regime_geral` e `rtc_calcular_simples_nacional`: calculam;
-  - `rtc_gerar_xml` e `rtc_validar_xml`: geram e validam o XML contra o XSD oficial.
+- **Local** (APIs oficiais rodando na máquina do usuário): não tem `rtc_municipio` e consulta as APIs ao vivo. Ferramentas:
+  - `rtc_status`, `rtc_esquema_entrada`, `rtc_consultar_aliquotas` e `rtc_dados_abertos`;
+  - `rtc_calcular_regime_geral`, `rtc_calcular_pedagio`, `rtc_base_calculo_unificada` e `rtc_calcular_simples_nacional`: calculam;
+  - `rtc_gerar_xml` e `rtc_validar_xml`: geram e validam o XML contra o XSD oficial;
+  - `rtc_consultar_classificacao`, `rtc_validar_nomenclatura`, `rtc_consultar_nomenclatura` e `rtc_atividades_simples`;
+  - `rtc_buscar_classificacoes`, que exige `criterio` (`cst`, `nbs`, `situacoes` ou `atores`) e não busca por texto nem NCM;
+  - `rtc_explicar_erro`, que aceita só REG e VSN;
+  - `rtc_gerar_danfse`: grava o PDF em disco.
 
 Se uma ferramenta de cálculo ou de XML não estiver disponível, o usuário está na versão remota. Nesse caso, faça a conta na mão seguindo esta skill. Sem nenhuma das duas versões, a skill funciona só com os arquivos de referência. Nunca peça ao usuário para instalar nada sem que ele queira.
 

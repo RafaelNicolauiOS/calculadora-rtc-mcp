@@ -21,6 +21,9 @@ const S = String.raw`\s*`;
 // Literais Java podem ser concatenadas com "+" (ex.: descrições longas do VSN).
 const CONCAT = `(?:${S}\\+${S}${STR})*`;
 
+// Desfaz os escapes de literal Java que aparecem nos catálogos.
+const desescapar = (t) => t.replace(/\\(["\\nt])/g, (_, c) => ({ n: "\n", t: "\t" })[c] ?? c);
+
 export function extrairErros(root) {
   const erros = [];
   // NOME(Excecao.class, "Título", "slug", new CodigoErro("REG-001", campo, EstadoItemEnum.X), "Descrição")
@@ -29,14 +32,15 @@ export function extrairErros(root) {
     "g",
   );
   for (const m of lerJava(root, "regime-regular", "ProblemType.java").matchAll(reProblem))
-    erros.push({ codigo: m[3], titulo: m[1], campo: m[4] ?? "", estado: m[5], descricao: m[6] });
+    erros.push({ codigo: m[3], titulo: desescapar(m[1]), campo: m[4] ?? "", estado: m[5], descricao: desescapar(m[6]) });
 
   // NOME("VSN-001", "Título", "Descrição" [+ "Descrição em outra linha"])
   const reVsn = new RegExp(`"(VSN-\\d{3})"${S},${S}${STR}${S},${S}(${STR}${CONCAT})`, "g");
   const reLiteral = new RegExp(STR, "g");
   for (const m of lerJava(root, "simples-nacional", "CodigoValidacaoSimples.java").matchAll(reVsn)) {
     const descricao = [...m[3].matchAll(reLiteral)].map((l) => l[1]).join("");
-    erros.push({ codigo: m[1], titulo: m[2], campo: "", estado: "", descricao });
+    
+    erros.push({ codigo: m[1], titulo: desescapar(m[2]), campo: "", estado: "", descricao: desescapar(descricao) });
   }
 
   return erros.sort((a, b) => a.codigo.localeCompare(b.codigo));

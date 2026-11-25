@@ -106,7 +106,7 @@
 | VSN-037 | Retenção do ISSQN (tpRetISSQN) ausente ou inválida | Na NFS-e, o tipo de retenção do ISSQN (tpRetISSQN) é obrigatório quando tribISSQN = 1, nas atividades com ISS no Simples, e deve ser 1 (não retido), 2 (retido pelo tomador) ou 3 (retido pelo intermediário). |
 | VSN-038 | Tipo de benefício municipal (tpBM) inválido | Na NFS-e, o tipo de benefício municipal do ISS (tpBM), quando informado, deve ser 1 (isenção), 2 (redução da base em %), 3 (redução da base em R$) ou 4 (alíquota diferenciada). Ausente = sem benefício municipal. |
 | VSN-039 | Alíquotas efetivas do contribuinte (aliquotasEfetivas) ausentes | No cálculo não assistido, a linha de alíquotas efetivas do contribuinte no período (aliquotasEfetivas) é obrigatória, exceto quando o regime não calcula tributos (SOMENTE_RECEITA). A falha rejeita a operação inteira. |
-| VSN-040 | Fator \"r\" (fatorR) ausente | O fatorR da linha de alíquotas é exigido quando o item tem atividade sujeita ao fator \"r\" (a 09): é ele que decide entre o Anexo III (fator r igual ou superior a 28%) e o Anexo V. |
+| VSN-040 | Fator "r" (fatorR) ausente | O fatorR da linha de alíquotas é exigido quando o item tem atividade sujeita ao fator "r" (a 09): é ele que decide entre o Anexo III (fator r igual ou superior a 28%) e o Anexo V. |
 | VSN-041 | NCM e NBS simultâneos | Informe NCM ou NBS, nunca ambos. |
 | VSN-042 | NCM incompleto | A classificação tributária exige um NCM completo com 8 caracteres. |
 | VSN-043 | NBS incompleto | A classificação tributária exige um NBS completo com 9 caracteres. |
