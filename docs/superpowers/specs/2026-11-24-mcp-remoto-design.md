@@ -130,7 +130,7 @@ A NBS tem a tabela `EXCECAO_NBS_APLICAVEL`, vazia na base V0073. Mesmo assim, o 
 
 ## Testes
 
-- **Unitários** (`vitest` com `@cloudflare/vitest-pool-workers`):
+- **Unitários** (`vitest` em Node, porque a lógica é pura; o runtime do Worker é coberto pela fumaça com `wrangler dev`):
   - tabela-verdade da nomenclatura, com casos reais: 200003 com 02074300 (exceção), 200028 com 122011200 (aceito por prefixo) e 000001 sem anexo;
   - busca sem acentos;
   - `rtc_explicar_erro` com código existente e inexistente;

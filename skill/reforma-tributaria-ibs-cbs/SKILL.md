@@ -93,7 +93,7 @@ Para montar o JSON da Calculadora ou explicar a resposta, siga o formato de `ref
 
 ## Ferramentas opcionais
 
-Se o agente do usuário tiver o servidor MCP **calculadora-rtc** conectado (ferramentas `rtc_*`), prefira as ferramentas a fazer as contas na mão:
+Se o agente do usuário tiver o servidor MCP **calculadora-rtc** conectado (ferramentas `rtc_*`), prefira as ferramentas às contas na mão. Há duas versões. A **remota** só faz consultas: `rtc_buscar_classificacoes`, `rtc_consultar_classificacao`, `rtc_validar_nomenclatura`, `rtc_consultar_nomenclatura`, `rtc_explicar_erro`, `rtc_atividades_simples`, `rtc_municipio` e `rtc_gerar_danfse`. A **local**, que roda as APIs oficiais na máquina do usuário, também calcula (`rtc_calcular_regime_geral`, `rtc_calcular_simples_nacional`) e gera e valida XML (`rtc_gerar_xml`, `rtc_validar_xml`).
 - `rtc_validar_nomenclatura`: confere NCM/NBS contra a classificação;
 - `rtc_calcular_regime_geral` e `rtc_calcular_simples_nacional`: calculam;
 - `rtc_explicar_erro`: explica códigos de erro;

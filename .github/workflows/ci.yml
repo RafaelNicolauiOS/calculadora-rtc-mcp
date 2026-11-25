@@ -37,7 +37,9 @@ jobs:
         with:
           node-version: "24"
           cache: npm
-          cache-dependency-path: mcp-server/package-lock.json
+          cache-dependency-path: |
+            mcp-server/package-lock.json
+            mcp-remote/package-lock.json
 
       - name: Compilar APIs (banco, JARs, DANFSe e WASM)
         run: ./scripts/build.sh
@@ -65,6 +67,24 @@ jobs:
 
       - name: Gerar dados do site
         run: node scripts/export-site-data.mjs
+
+      - name: Testar MCP remoto (unitários e paridade com a API oficial)
+        working-directory: mcp-remote
+        env:
+          RTC_PARIDADE_URL: http://localhost:8080/api
+        run: npm ci && npm test && npx tsc --noEmit
+
+      - name: Conferir bundle do MCP remoto (dry-run)
+        working-directory: mcp-remote
+        run: npm run verificar-deploy
+
+      - name: Publicar pacote do MCP remoto
+        uses: actions/upload-artifact@v4
+        with:
+          name: mcp-remote-pacote
+          path: |
+            mcp-remote/data
+            mcp-remote/danfse/vendor
 
       - name: Publicar WASM do DANFSe como artefato
         uses: actions/upload-artifact@v4
@@ -96,3 +116,34 @@ jobs:
     steps:
       - id: deploy
         uses: actions/deploy-pages@v4
+
+  deploy-mcp-remoto:
+    needs: build-and-smoke
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Verificar credenciais
+        id: cred
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then echo "Sem CLOUDFLARE_API_TOKEN: deploy pulado."; echo "ok=false" >> "$GITHUB_OUTPUT"; else echo "ok=true" >> "$GITHUB_OUTPUT"; fi
+      - uses: actions/checkout@v4
+        if: steps.cred.outputs.ok == 'true'
+      - uses: actions/download-artifact@v4
+        if: steps.cred.outputs.ok == 'true'
+        with:
+          name: mcp-remote-pacote
+          path: mcp-remote
+      - uses: actions/setup-node@v4
+        if: steps.cred.outputs.ok == 'true'
+        with:
+          node-version: "24"
+      - name: Deploy dos Workers
+        if: steps.cred.outputs.ok == 'true'
+        working-directory: mcp-remote
+        run: |
+          npm ci
+          npx wrangler deploy -c danfse/wrangler.toml
+          npx wrangler deploy -c wrangler.toml
