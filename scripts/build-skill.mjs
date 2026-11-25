@@ -2,7 +2,7 @@
 // Gera os arquivos de referência da skill (skill/reforma-tributaria-ibs-cbs/reference/*.md)
 // a partir de site/data/*.json e dos catálogos de erro do código oficial em upstream/.
 // Rode depois de scripts/export-site-data.mjs:  node scripts/build-skill.mjs
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { copyFileSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { extrairErros } from "./lib/erros.mjs";
@@ -162,3 +162,19 @@ const corta = (s, n) => (s.length > n ? s.slice(0, n - 1).trimEnd() + "…" : s)
 }
 
 console.log(`referências geradas em ${path.relative(root, out)}`);
+
+// ------------------------------------------------------------------ skills derivadas
+// As skills menores de Reforma Tributária usam só parte das referências; a fonte é sempre a mesma.
+const derivadas = {
+  "classificador-cadastro-produtos": ["cst-cclasstrib.md", "vinculos-ncm-nbs.md", "imposto-seletivo.md"],
+  "revisor-notas-rejeitadas": ["erros.md", "cst-cclasstrib.md", "vinculos-ncm-nbs.md"],
+  "simples-nacional-reforma": ["simples-atividades.md", "erros.md"],
+  "creditos-ibs-cbs": ["cst-cclasstrib.md"],
+  "simulador-transicao-reforma": ["cst-cclasstrib.md"],
+};
+for (const [skill, arquivos] of Object.entries(derivadas)) {
+  const destino = path.join(root, "skill", skill, "reference");
+  mkdirSync(destino, { recursive: true });
+  for (const f of arquivos) copyFileSync(path.join(out, f), path.join(destino, f));
+}
+console.log(`referências copiadas para ${Object.keys(derivadas).length} skills derivadas`);
