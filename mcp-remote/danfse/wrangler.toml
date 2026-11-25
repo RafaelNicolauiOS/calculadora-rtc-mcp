@@ -1,0 +1,12 @@
+name = "calculadora-rtc-danfse"
+main = "src/index.ts"
+compatibility_date = "2026-11-01"
+workers_dev = false
+preview_urls = false
+
+[limits]
+cpu_ms = 30000
+
+[observability]
+enabled = true
+head_sampling_rate = 1
