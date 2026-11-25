@@ -107,6 +107,30 @@ Variáveis de ambiente opcionais:
 | `RTC_HTTP_TIMEOUT_MS` | `60000` |
 | `RTC_MAX_RESPONSE_CHARS` | `60000` (respostas maiores são truncadas) |
 
+## MCP remoto (sem instalar nada)
+
+Também existe uma versão hospedada, só de consulta: classificações, anexos de NCM/NBS, Imposto Seletivo, Simples Nacional, códigos de erro, municípios e geração do DANFSe. O código fica em [`mcp-remote/`](mcp-remote/) e roda no Cloudflare Workers. Ela **não calcula** tributos: para isso, use o MCP local acima.
+
+```bash
+claude mcp add --transport http calculadora-rtc https://<url-do-worker>/mcp
+```
+
+Outros clientes:
+
+- **Claude Desktop e claude.ai:** em Configurações > Conectores, adicione um conector personalizado com a URL `https://<url-do-worker>/mcp`.
+- **Cursor:** em `.cursor/mcp.json`, use `{"mcpServers":{"calculadora-rtc":{"url":"https://<url-do-worker>/mcp"}}}`.
+- **Qualquer outro cliente MCP com Streamable HTTP:** informe a mesma URL, sem autenticação.
+
+Não há login. O limite é de 60 requisições por minuto por IP. O PDF do DANFSe fica disponível por 1 hora e o XML não é guardado. Os logs guardam apenas o padrão da rota, o status e a duração (veja `/privacidade` no próprio servidor).
+
+Desenvolvimento local, depois de gerar `site/data` com `node scripts/export-site-data.mjs`:
+
+```bash
+cd mcp-remote && npm install && npm test && npm run dev
+```
+
+Para publicar, é preciso uma conta Cloudflare com Workers Paid, o bucket R2 `calculadora-rtc-danfse-pdf` e os secrets `CLOUDFLARE_API_TOKEN` e `CLOUDFLARE_ACCOUNT_ID` no repositório. O CI publica a cada push no `main`.
+
 ## Ferramentas
 
 | Ferramenta | API | Para quê |

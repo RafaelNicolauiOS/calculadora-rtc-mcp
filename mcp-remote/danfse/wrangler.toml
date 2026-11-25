@@ -1,0 +1,16 @@
+name = "calculadora-rtc-danfse"
+main = "src/index.ts"
+compatibility_date = "2026-11-01"
+workers_dev = false
+preview_urls = false
+
+[limits]
+cpu_ms = 30000
+
+# Sem logs: o gerador oficial em Go escreve no console dados vindos do XML.
+[observability]
+enabled = false
+
+[observability.logs]
+enabled = false
+invocation_logs = false
