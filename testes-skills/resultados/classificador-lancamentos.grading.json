@@ -1,0 +1,30 @@
+{
+  "skill": "classificador-lancamentos",
+  "expectations": [
+    {
+      "text": "Classifica o PIX para o sócio como retirada/lucros a distribuir, não como despesa",
+      "passed": true,
+      "evidence": "'02/07 | 2.3.1.01 Lucros a distribuir | 1.1.1.02 Banco Itau | 5.000,00' e 'movimento com socio nao vai a despesa'."
+    },
+    {
+      "text": "Classifica o pagamento ao fornecedor a débito de Fornecedores (provisionado), não de despesa",
+      "passed": true,
+      "evidence": "'08/07 | 2.1.1.01 Fornecedores | 1.1.1.02 ... baixa de provisao'."
+    },
+    {
+      "text": "Usa apenas contas existentes no plano informado (energia 4.2.1.09, banco 1.1.1.02 etc.)",
+      "passed": true,
+      "evidence": "Todas as contas usadas existem no plano (2.3.1.01, 4.2.1.09, 2.1.1.01, 2.1.3.01, 1.1.2.01, 1.1.1.02); para casos sem conta, sugere criar em vez de inventar codigo."
+    },
+    {
+      "text": "Gera lançamentos com débito, crédito, valor e histórico",
+      "passed": true,
+      "evidence": "CSV e tabela com data, debito, credito, valor e historico."
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [
+    "Pergunta sobre o DAS cita 'competencia (provavelmente 06/2025)', ano inventado sem base no pedido. Menor."
+  ],
+  "skill_fixes": []
+}

@@ -15,10 +15,19 @@ O erro mais caro com o ISS é recolher no município errado ou deixar de reter q
 
 ## Passo 1: onde o ISS é devido
 - **Regra geral**: no município do estabelecimento prestador (art. 3º da LC 116/2003).
-- **Exceções**: para os serviços listados nos incisos do art. 3º, é devido no local da execução ou do tomador. Exemplos: construção civil (item 7), limpeza, vigilância, armazenagem, diversões públicas e outros. Indique o inciso aplicável. Se o serviço não estiver entre as exceções, vale a regra geral.
+- **Exceções (incisos do art. 3º)**: o ISS é devido no local da execução, dos bens ou do tomador para estes subitens:
+  - 3.05, 7.02, 7.04, 7.05, 7.09, 7.10, 7.11, 7.12, 7.16, 7.17, 7.18, 7.19;
+  - 11.01 e 11.02 (vigilância, segurança ou monitoramento: local dos bens ou do domicílio das pessoas vigiadas);
+  - 11.04, o item 12 (exceto 12.13), 16.01, 17.05, 17.10 e o item 20.
+
+  Se o subitem estiver nesta lista, a conclusão é a exceção: não a negue nem a transforme em pendência. O que fica a confirmar é só a lei municipal (alíquota e procedimento).
+
+  Os subitens 4.22, 4.23, 5.09, 10.04, 15.01 e 15.09 foram acrescentados por leis complementares posteriores (LC 157/2016 e LC 175/2020). Confirme a situação vigente antes de concluir.
+
+  Se o serviço não estiver entre as exceções, vale a regra geral.
 
 ## Passo 2: há retenção?
-- O município pode atribuir responsabilidade ao tomador (art. 6º da LC 116/2003). Nos serviços das exceções do art. 3º, o tomador pessoa jurídica costuma ser responsável quando o imposto é devido no seu município.
+- O município pode atribuir responsabilidade ao tomador (art. 6º da LC 116/2003). O art. 6º, §2º, II, já torna responsável o tomador pessoa jurídica, ainda que imune ou isento, nos subitens 3.05, 7.02, 7.04, 7.05, 7.09, 7.10, 7.12, 7.16, 7.17, 7.19, 11.02, 17.05 e 17.10. A retenção é a favor do município onde o imposto é devido.
 - Cada município define ainda outras hipóteses de substituição na lei local. **Peça a lei municipal ou confirme no portal da prefeitura** antes de afirmar a retenção nos casos que não sejam da LC.
 - **MEI**: em regra, não há retenção de ISS do MEI. Confirme a regra vigente.
 

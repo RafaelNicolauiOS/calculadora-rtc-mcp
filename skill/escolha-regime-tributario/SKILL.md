@@ -26,18 +26,28 @@ A escolha do regime é anual e, em regra, irretratável no ano. Errar custa um a
   - PIS 1,65% e COFINS 7,6% não cumulativos, com créditos.
 - **Reforma Tributária**: a partir de 2027, PIS e COFINS são substituídos pela CBS, em todos os regimes de lucro. Para 2027 em diante, troque PIS/COFINS pela CBS nas premissas e explique que a vantagem do Real não cumulativo muda de natureza. No Simples, considere a opção de IBS/CBS por fora (ver a skill do Simples na reforma).
 
-Não invente as tabelas do Simples. Peça a alíquota efetiva do anexo e da faixa, ou a receita dos últimos 12 meses e a tabela do anexo para calcular a efetiva pela fórmula: (RBT12 × alíquota nominal − parcela a deduzir) ÷ RBT12.
+Peça a alíquota efetiva do PGDAS-D ou a RBT12. Se o usuário não fornecer e a resposta depender disso, você pode usar as tabelas dos Anexos I a V da LC 123/2006 (redação da LC 155/2016), desde que:
+- diga que são as tabelas da lei usadas como premissa;
+- mostre a faixa, a alíquota nominal e a parcela a deduzir usadas;
+- peça a confirmação com o PGDAS-D.
+
+A efetiva é (RBT12 × alíquota nominal − parcela a deduzir) ÷ RBT12. Nunca use de memória os percentuais de repartição dos tributos dentro do DAS.
 
 ## Simulação
 Para cada regime, calcule o total anual de tributos federais, a CPP ou INSS patronal sobre a folha (incluso no DAS em alguns anexos) e o ICMS ou ISS estimado. Some os tributos e mostre o valor, a carga sobre a receita e a diferença para o melhor regime.
 
 Faça ao menos um teste de sensibilidade: margem menor ou maior, ou faturamento ±20%. Isso mostra se a escolha é robusta.
 
+Se o ano simulado for 2027 ou posterior (inclusive para empresa aberta no fim de 2026), a tabela principal usa a CBS no lugar de PIS/COFINS no Presumido e no Real, com a alíquota declarada como hipótese. PIS/COFINS só entram numa coluna de comparação com 2026. Não suponha UF ou município que o usuário não informou: deixe a alíquota de ISS ou ICMS como parâmetro.
+
 ## Saída
 - Tabela comparativa por regime: valores por tributo, total, carga % e ranking.
 - Recomendação com o motivo em 2 ou 3 frases, mais os riscos (vedações, sublimites, custo de obrigações acessórias do Real).
 - Premissas e pendências para confirmar.
-- Prazo: a opção pelo Simples, em regra, é feita em janeiro; a do Presumido ou Real, com o primeiro pagamento do ano. Confirme o calendário vigente.
+- Prazo:
+  - Simples, empresa já existente: a opção é feita em janeiro.
+  - Simples, empresa em início de atividade: a opção tem prazo próprio contado das inscrições municipal ou estadual e da abertura do CNPJ (Resolução CGSN 140/2018; confirme os prazos na redação vigente).
+  - Presumido ou Real: a opção se dá com o primeiro pagamento do ano ou do início da atividade.
 
 ## Limites
 É uma estimativa para decisão gerencial. Benefícios fiscais, regimes especiais (ex.: setores monofásicos, ST, incentivos regionais) e a estrutura societária podem mudar o resultado. Sinalize quando eles existirem.

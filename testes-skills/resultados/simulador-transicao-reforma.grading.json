@@ -1,0 +1,38 @@
+{
+  "skill": "simulador-transicao-reforma",
+  "expectations": [
+    {
+      "text": "Apresenta a tabela ano a ano de 2026 a 2033",
+      "passed": true,
+      "evidence": "Tabelas dos cenarios A e B com linhas 2026 a 2033 (e 'Hoje')."
+    },
+    {
+      "text": "Não afirma alíquotas definitivas de CBS/IBS a partir de 2027: usa cenários declarados como hipótese ou pede ao usuário",
+      "passed": true,
+      "evidence": "'as aliquotas de IBS/CBS de 2027 em diante sao hipoteses'; 'Cenarios de aliquota (hipoteses): CBS 8,8% e IBS 17,7%'."
+    },
+    {
+      "text": "Verifica se cursos de idiomas têm direito à redução de 60% da educação (200028), sem afirmar o benefício sem checar a referência ou o anexo",
+      "passed": true,
+      "evidence": "'a classificacao 200028 so vale para os servicos de educacao listados no Anexo II (NBS). Confirme se o NBS do curso de idiomas ... consta no anexo. ... Nao presuma o beneficio.' Monta cenarios com e sem a reducao."
+    },
+    {
+      "text": "Lista as premissas usadas e o que precisa ser confirmado",
+      "passed": true,
+      "evidence": "Secao 1 (premissas) e secao 5 'O que o escritorio precisa confirmar'."
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [
+    "Erro de calculo relevante no cenario B: o credito das compras foi calculado com a aliquota reduzida da escola (150.000 x 3,56% = 5.340 em 2027; 15.900 em 2033). O credito corresponde ao IBS/CBS destacado pelo fornecedor, que nao tem a reducao da educacao; o credito correto e o mesmo do cenario A (13.350 em 2027; 39.750 em 2033). Com isso o total do cenario B em 2027 seria 53.370 (4,45%) e em 2033 87.450 (7,29%), e nao 61.380 e 111.300.",
+    "Ponto da disputa sobre 200028: o executor nao tinha a lista de NBS do 200028 (a skill so traz cst-cclasstrib.md). Em vinculos-ncm-nbs.md (de outras skills) o 200028 aceita apenas 122011, 122012000, 122013000, 122020000, 12203, 12204 e 122051300; dentro de 1.2205 so um codigo e aceito, que corresponde (conferir na NBS) a ensino de linguas nativas de povos originarios. Cursos livres de idiomas tendem a ficar no cenario A. Apresentar os dois cenarios como equiprovaveis superestima o B.",
+    "Usa CBS 8,8% + IBS 0,1% em 2027-2028 (8,9%), quando o cronograma reduz a CBS de 2027 em 0,1 ponto; diferenca pequena, mas nao declarada."
+  ],
+  "skill_fixes": [
+    {
+      "prioridade": 3,
+      "problema": "A skill nao diz como calcular o credito das compras quando o cliente tem reducao de aliquota, e nao traz a lista de NBS/NCM aceitos por classificacao, o que impede checar o 200028.",
+      "alteracao": "Em 'Calculo', passo 2, acrescentar: \"O credito das compras e o IBS/CBS destacado pelo fornecedor, calculado pela aliquota da operacao de compra (em regra a cheia), e NAO pela aliquota reduzida das vendas do cliente. Uma reducao nas vendas nao reduz o credito das entradas.\" Copiar `reference/vinculos-ncm-nbs.md` para a skill e, em 'Referencia', acrescentar: \"`reference/vinculos-ncm-nbs.md`: NCM/NBS aceitos por cada classificacao com anexo. Antes de montar um cenario com reducao, confira se o NCM/NBS do cliente esta na lista; se nao estiver, use o cenario sem reducao como principal e mencione o outro so como alternativa a confirmar.\""
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+Empresa de engenharia no Simples. Receita dos últimos 12 meses: R$ 600.000. Folha dos últimos 12 meses (com pró-labore e encargos): R$ 120.000. Quanto de pró-labore a mais por mês ela precisa pra ir pro anexo III?

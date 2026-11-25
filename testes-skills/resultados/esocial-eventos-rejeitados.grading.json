@@ -1,0 +1,28 @@
+{
+  "skill": "esocial-eventos-rejeitados",
+  "expectations": [
+    {
+      "text": "Identifica a causa como dependência: falta o S-2200 (admissão) do trabalhador",
+      "passed": true,
+      "evidence": "'O S-1200 (remuneracao) depende do evento de admissao, o S-2200 ... Sem esse evento aceito, o S-1200 e rejeitado.'"
+    },
+    {
+      "text": "Indica a ordem correta: enviar o S-2200 antes e depois reenviar o S-1200",
+      "passed": true,
+      "evidence": "Passo a passo: enviar/corrigir o S-2200, aguardar recibo e 'Com o S-2200 aceito, reenvie o S-1200'."
+    },
+    {
+      "text": "Menciona efeitos colaterais (ex.: fechamento S-1299 e guias DCTFWeb/FGTS Digital)",
+      "passed": true,
+      "evidence": "'Isso trava o S-1299, a DCTFWeb e o FGTS Digital do mes' e secao 'Efeitos colaterais' (guias, S-1298)."
+    },
+    {
+      "text": "Não inventa o significado de um código numérico que não foi informado",
+      "passed": true,
+      "evidence": "'Nao conheco o codigo numerico nem o texto completo da mensagem.'"
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [],
+  "skill_fixes": []
+}

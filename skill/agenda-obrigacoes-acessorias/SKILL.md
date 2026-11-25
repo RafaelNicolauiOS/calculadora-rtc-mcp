@@ -20,9 +20,11 @@ Para cada cliente, colete ou deduza:
 ## Obrigações por perfil (estrutura, confirme cada uma)
 - **MEI**: DAS-MEI mensal e declaração anual (DASN-SIMEI). Com empregado, eSocial e FGTS Digital.
 - **Simples Nacional**: PGDAS-D e DAS mensais, DEFIS anual, obrigações estaduais (ex.: DeSTDA, onde exigida) e municipais (ISS e NFS-e). Com empregados, a folha via eSocial, a DCTFWeb e o FGTS Digital.
+- **Qualquer perfil com folha**: além da DCTFWeb (declaração), inclua o **DARF da DCTFWeb** (INSS e IRRF da folha) e o **FGTS Digital**, os dois com vencimento usual no dia 20, antecipando para o dia útil anterior quando cair em dia não útil.
 - **Lucro Presumido e Real**:
   - DCTFWeb, EFD-Reinf, eSocial e FGTS Digital;
-  - EFD-Contribuições e EFD ICMS/IPI (se contribuinte de ICMS ou IPI);
+  - EFD ICMS/IPI (se contribuinte de ICMS ou IPI);
+  - EFD-Contribuições: até a competência 12/2026 para PIS/COFINS. A partir de 2027, só se houver CPRB (desoneração da folha em transição) ou retificação de períodos anteriores. Pergunte em vez de excluir;
   - ECD e ECF anuais;
   - DARF de IRPJ/CSLL (trimestral ou por estimativa mensal) e de PIS/COFINS mensal;
   - guias de ICMS e ISS conforme a UF e o município.

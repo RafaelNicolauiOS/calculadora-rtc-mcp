@@ -15,7 +15,8 @@ Para muitas empresas de serviços do Simples Nacional, a diferença entre o Anex
 
 ## Entradas
 - Receita bruta e folha (com os componentes) de cada um dos últimos 12 meses, e as previsões dos próximos meses.
-- As alíquotas efetivas atuais (ou a RBT12 e as tabelas) dos Anexos III e V. **Não use tabela de memória**: peça ou confirme.
+- As alíquotas efetivas atuais dos Anexos III e V (do PGDAS-D) ou a RBT12. Se o usuário não fornecer, você pode usar as tabelas dos Anexos III e V da LC 123/2006 (redação da LC 155/2016) como premissa declarada, mostrando a faixa, a alíquota nominal e a parcela a deduzir, e pedindo a confirmação com o PGDAS-D.
+- O pró-labore atual de cada sócio. O custo de INSS do pró-labore adicional depende de o sócio já estar perto do teto: acima do teto, o INSS adicional do segurado é zero.
 - As tabelas vigentes de INSS e IRRF, para o custo do pró-labore.
 
 ## Cálculo

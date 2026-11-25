@@ -1,0 +1,28 @@
+{
+  "skill": "onboarding-cliente",
+  "expectations": [
+    {
+      "text": "Lista acessos e procurações (e-CAC, SEFAZ, prefeitura, eSocial/FGTS Digital) preferindo procuração a senhas",
+      "passed": true,
+      "evidence": "Linhas de procuracao no e-CAC, SEFAZ-PE, Prefeitura do Recife, eSocial e FGTS Digital, com 'Prefira a procuracao' e 'nao mandar senhas'."
+    },
+    {
+      "text": "Lista o que pedir ao contador anterior (balancetes, SPEDs/declarações, folha/eSocial, parcelamentos)",
+      "passed": true,
+      "evidence": "Secao 2: livros e balancos/balancete, PGDAS-D/DEFIS, parcelamentos, folha e eSocial."
+    },
+    {
+      "text": "Inclui o levantamento de certidões e pendências, com o risco de exclusão do Simples por débitos",
+      "passed": true,
+      "evidence": "'Certidoes e relatorios de situacao fiscal ...' e 'debito no Simples (risco de exclusao e prazos de regularizacao)'."
+    },
+    {
+      "text": "Entrega um cronograma das primeiras semanas e uma mensagem de boas-vindas",
+      "passed": true,
+      "evidence": "Cronograma de 4 semanas e 'Mensagem de boas-vindas'."
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [],
+  "skill_fixes": []
+}

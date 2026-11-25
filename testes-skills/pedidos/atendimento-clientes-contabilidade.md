@@ -1,0 +1,1 @@
+Escreve uma mensagem de WhatsApp pra Dona Maria (cliente, padaria) mandando o DAS de maio, R$ 2.340,00, vence dia 20, e cobrando os extratos bancários de maio que ela ainda não mandou. O DAS subiu porque ela faturou mais.

@@ -1,0 +1,38 @@
+{
+  "skill": "agenda-obrigacoes-acessorias",
+  "expectations": [
+    {
+      "text": "Inclui PGDAS-D/DAS, eSocial, DCTFWeb e FGTS Digital para a padaria",
+      "passed": true,
+      "evidence": "Padaria: linhas de eSocial, DCTFWeb, PGDAS-D e DAS e FGTS Digital."
+    },
+    {
+      "text": "Inclui DCTFWeb, EFD-Reinf, EFD-Contribuições, eSocial, FGTS Digital e o ISS municipal para a Tech, e não inclui EFD ICMS/IPI",
+      "passed": false,
+      "evidence": "Tech: inclui DCTFWeb, EFD-Reinf, eSocial, FGTS Digital e ISS, e exclui EFD ICMS/IPI ('Sem ICMS: nao ha EFD ICMS/IPI'), mas exclui deliberadamente a EFD-Contribuicoes ('para competencias de 2027 nao incluí ... EFD-Contribuicoes'). Observacao: a exclusao tem fundamento parcial (PIS/COFINS extintos em 2027), mas a empresa de software pode estar na CPRB, que ainda existe em 2027 na reoneracao gradual da Lei 14.973/2024 e e escriturada na EFD-Contribuicoes; o correto seria incluir como condicional e perguntar. A assercao tambem deveria ser atualizada para essa condicao."
+    },
+    {
+      "text": "Marca as datas de vencimento como a confirmar (ou indica a fonte oficial) em vez de apresentá-las como definitivas",
+      "passed": true,
+      "evidence": "Todas as linhas com 'Data confirmada: Nao, confirmar' e indicacao da Agenda Tributaria da RFB, SEFAZ-SP e prefeituras."
+    },
+    {
+      "text": "Entrega em formato de tabela com cliente, obrigação, vencimento, responsável e status",
+      "passed": true,
+      "evidence": "Tabela com Cliente, Obrigacao, Competencia, Vencimento, Data confirmada, Responsavel ('a definir'), Documentos e Status."
+    }
+  ],
+  "pass_rate": 0.75,
+  "extra_issues": [
+    "Omite o pagamento do DARF gerado pela DCTFWeb (contribuicoes previdenciarias e IRRF sobre a folha), que vence no dia 20 com antecipacao para o dia util anterior (18/06/2027, sexta). Na Tech e a guia mais cara do mes; na Padaria (Anexo I) cobre ao menos o INSS retido dos empregados.",
+    "FGTS Digital: o vencimento do dia 20 antecipa para o dia util anterior (Lei 8.036/1990, art. 15); a agenda deixou 'confirmar se antecipa ou posterga', quando a regra e de antecipacao (18/06).",
+    "Nao considerou a CPRB (desoneracao da folha) para a empresa de software em 2027 nem perguntou por ela."
+  ],
+  "skill_fixes": [
+    {
+      "prioridade": 4,
+      "problema": "A lista de obrigacoes do Presumido/Real nao diz o que acontece com a EFD-Contribuicoes a partir de 2027 nem lista o DARF da DCTFWeb; o executor excluiu a EFD-Contribuicoes por suposicao e esqueceu a principal guia da folha.",
+      "alteracao": "Em 'Obrigacoes por perfil', no bloco Lucro Presumido e Real, substituir o item 'EFD-Contribuicoes e EFD ICMS/IPI (se contribuinte de ICMS ou IPI)' por: \"EFD ICMS/IPI (se contribuinte de ICMS ou IPI); EFD-Contribuicoes: ate a competencia 12/2026 para PIS/COFINS; a partir de 2027 so se houver CPRB (desoneracao da folha em transicao, Lei 14.973/2024) ou retificacao de periodos anteriores. Pergunte em vez de excluir.\" E acrescentar em todos os perfis com folha: \"DARF da DCTFWeb (INSS e IRRF da folha), no dia 20, antecipando para o dia util anterior. FGTS Digital no dia 20, tambem antecipando.\""
+    }
+  ]
+}

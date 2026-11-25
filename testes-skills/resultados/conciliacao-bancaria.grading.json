@@ -1,0 +1,35 @@
+{
+  "skill": "conciliacao-bancaria",
+  "expectations": [
+    {
+      "text": "Concilia o pagamento Beta mesmo com 1 dia de diferença",
+      "passed": true,
+      "evidence": "'10/06 PAG BOLETO FORN BETA -1.250,00 | Conciliado | 11/06 Pagamento Beta' com '1 dia de diferenca (data proxima)'."
+    },
+    {
+      "text": "Concilia o crédito de 5.430 com a soma dos dois recebimentos de cartão (um para muitos)",
+      "passed": true,
+      "evidence": "'TED RECEBIDA LOTE CARTAO 5.430,00 | Conciliado (um para muitos) | 2.430,00 + 3.000,00'."
+    },
+    {
+      "text": "Aponta tarifa e IOF como sem lançamento e sugere despesas financeiras",
+      "passed": true,
+      "evidence": "Tarifa e IOF 'Sem lancamento', natureza sugerida 'Despesa financeira'."
+    },
+    {
+      "text": "Aponta o pagamento de aluguel de 20/06 como lançamento sem movimento no extrato",
+      "passed": true,
+      "evidence": "'20/06 | Pagamento aluguel | -2.000,00 | A confirmar | Nao consta no extrato de junho'."
+    },
+    {
+      "text": "Apresenta a demonstração da conciliação de saldos ou a diferença residual",
+      "passed": true,
+      "evidence": "Demonstracao: movimentacao liquida do extrato 7.085,78, do razao 5.180,00, diferenca 1.905,78 explicada (-94,22 + 2.000,00), residual 0,00. Contas conferidas."
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [
+    "Historico do lancamento sugerido traz 'Tarifa pacote de servicos 06/2025', ano inventado (ressalvado como 'ilustrativo'), e cabecalho 'Contas conforme o seu plano' quando nao houve plano de contas. Menor."
+  ],
+  "skill_fixes": []
+}

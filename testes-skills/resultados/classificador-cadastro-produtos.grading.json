@@ -1,0 +1,44 @@
+{
+  "skill": "classificador-cadastro-produtos",
+  "expectations": [
+    {
+      "text": "Classifica o arroz (10063021) e o feijão (07133319) com cClassTrib 200003 (cesta básica, redução de 100%)",
+      "passed": true,
+      "evidence": "Tabela: ARROZ ...;10063021;200;200003 e FEIJAO ...;07133319;200;200003, ambos com reducao 100%/100%. Correto: em vinculos-ncm-nbs.md o 200003 aceita o prefixo 100630 e o codigo 07133319, e o 200034 os exclui expressamente ('10 (exceto 100620, 100630, 10064000)' e '07 (exceto ... 07133319 ...)')."
+    },
+    {
+      "text": "Usa 000001 para itens sem tratamento diferenciado, como o sabão em pó",
+      "passed": true,
+      "evidence": "SABAO EM PO 1KG;34022000;000;000001 com justificativa 'NCM 3402.20 nao consta no Anexo VIII'."
+    },
+    {
+      "text": "Marca a cerveja (2203) e o refrigerante (22021000) como sujeitos ao Imposto Seletivo a partir de 2027",
+      "passed": true,
+      "evidence": "Cerveja e refrigerante com sujeito_IS = 'sim', e no resumo: 'Itens sujeitos a Imposto Seletivo a partir de 2027: cerveja (NCM 2203) e refrigerante (NCM 22021000)'."
+    },
+    {
+      "text": "Coloca o item 'KIT PRESENTE DIVERSOS' com NCM 9999 na fila de revisão por NCM incompleto/inválido",
+      "passed": true,
+      "evidence": "KIT PRESENTE DIVERSOS;9999;;;REVISAR ... 'NCM incompleto (4 digitos) e descricao generica'; repetido na lista 'Revisar'."
+    },
+    {
+      "text": "Entrega a tabela com colunas de CST, cClassTrib, confiança e justificativa",
+      "passed": true,
+      "evidence": "CSV com colunas CST, cClassTrib, descricao_classificacao, reducao_cbs, reducao_ibs, sujeito_IS, confianca, justificativa."
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [
+    "Inconsistencia no IS: a coluna sujeito_IS diz 'sim (IS 000001)', que no catalogo e 'Primeiro fornecimento' (fabricante/importador); o proprio resumo admite que, na revenda pelo mercadinho, a classificacao do IS e a 200007 (sem calculo). A tabela do ERP deveria trazer 200007 para a revenda.",
+    "Afirma que os itens com IS 'precisam do grupo impostoSeletivo com aliquota informada'; para revendedor (IS 200007, 'Sem Calculo') isso nao vale. Tambem descreve REG-014 como 'antes de 2027 o grupo nao deve ser enviado', mas em erros.md o REG-014 e 'dados do IS informados quando a classificacao nao preve incidencia'.",
+    "Sabao em po marcado com confianca 'Media', contra a regra da skill ('Alta: ... ou nao ha tratamento diferenciado possivel'). Menor.",
+    "Disputa resolvida: a afirmacao do executor de que arroz e feijao aparecem tanto em 200003 quanto em 200034 e falsa; o 200034 os lista como excecoes. A classificacao final (200003 para os dois) esta correta e a assercao A0 esta correta."
+  ],
+  "skill_fixes": [
+    {
+      "prioridade": 7,
+      "problema": "O executor leu os prefixos do 200034 ('07', '10') sem aplicar as excecoes e concluiu que arroz e feijao estavam em duas classificacoes; e usou IS 000001 para revenda.",
+      "alteracao": "No passo 2 do Metodo, acrescentar: \"Um codigo listado entre parenteses como 'exceto' NAO e aceito por aquela classificacao. Os anexos I (200003) e VII (200034) foram construidos para nao se sobrepor: se o NCM esta no 200003, ele esta excluido do 200034. So diga que ha duas candidatas depois de conferir as excecoes.\" No passo 6, acrescentar: \"Na coluna sujeito_IS, indique a cClassTrib do IS conforme a posicao do cliente na cadeia: 000001 apenas para o primeiro fornecimento (fabricante ou importador); para revenda por varejista ou atacadista, 200007 (tributado em operacao anterior, sem calculo), sem aliquota de IS no item.\""
+    }
+  ]
+}

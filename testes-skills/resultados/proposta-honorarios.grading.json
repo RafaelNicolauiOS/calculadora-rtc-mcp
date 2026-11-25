@@ -1,0 +1,37 @@
+{
+  "skill": "proposta-honorarios",
+  "expectations": [
+    {
+      "text": "Monta a memória de cálculo com horas por rotina, custo-hora de 120 e margem de 35%",
+      "passed": true,
+      "evidence": "Tabela de horas por rotina (total 60,6 h), '60,6 h x R$ 120 = R$ 7.272,00', '7.272 / 0,65 = R$ 11.187,69', e alternativa de markup."
+    },
+    {
+      "text": "Considera volume de notas, funcionários, filiais em UFs diferentes e ST como fatores de complexidade",
+      "passed": true,
+      "evidence": "Linhas especificas para 470 notas, ST, '2 filiais em estados diferentes' e '18 x 0,75' h de DP."
+    },
+    {
+      "text": "Separa os serviços inclusos dos cobrados à parte",
+      "passed": true,
+      "evidence": "Blocos 'Servicos incluidos na mensalidade' e 'Nao incluido (cobrado a parte ...)'."
+    },
+    {
+      "text": "Entrega o texto da proposta pronto para enviar, com condições e validade",
+      "passed": true,
+      "evidence": "Texto 'Proposta de Prestacao de Servicos Contabeis' com condicoes e 'Validade desta proposta: [30] dias'."
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [
+    "Proposta feita em novembro/2026 para servico continuo: o escopo inclui 'Apuracao mensal de ... PIS, COFINS' e EFD-Contribuicoes, que deixam de existir em 2027, e nao inclui a apuracao de CBS/IBS, que manda para 'cobrado a parte' junto com a adaptacao do cadastro. Risco de escopo e de conflito com o cliente a partir de janeiro.",
+    "A distribuicao por area (Fiscal 5.730, Atendimento 400) nao bate exatamente com a proporcao das horas (cerca de 5.748 e 370). Menor."
+  ],
+  "skill_fixes": [
+    {
+      "prioridade": 9,
+      "problema": "A skill nao orienta o escopo das obrigacoes da Reforma, e o executor manteve PIS/COFINS e mandou a apuracao de CBS/IBS para fora do escopo.",
+      "alteracao": "Na secao de escopo da proposta, acrescentar: \"Para contratos que alcancem 2027 em diante, liste no escopo a apuracao e as obrigacoes de CBS/IBS (e do IS, se houver) no lugar de PIS/COFINS, e deixe como servico a parte apenas projetos pontuais (reclassificacao do cadastro, simulacoes, revisao de contratos). Preveja clausula de revisao do escopo quando o regulamento das novas obrigacoes for publicado.\""
+    }
+  ]
+}

@@ -28,12 +28,13 @@ Se ele não tiver, ofereça um modelo de cálculo (horas por rotina × custo-hor
 1. **Base pelo regime**, que define o volume de obrigações.
 2. **Adicionais por volume**: faixas de notas por mês, por funcionário e por estabelecimento ou UF.
 3. **Fator de complexidade** (±): ST, importação, construção civil, atividade com regime especial, desorganização documental.
-4. **Serviços fora da mensalidade**, cobrados à parte:
+4. **Reforma Tributária no escopo**: em contratos que alcancem 2027 em diante, liste no escopo mensal a apuração e as obrigações de CBS/IBS (e do IS, se houver) no lugar de PIS/COFINS. Deixe como serviço à parte só os projetos pontuais (reclassificação do cadastro, simulações, revisão de contratos). Preveja uma cláusula de revisão do escopo quando o regulamento das novas obrigações for publicado.
+5. **Serviços fora da mensalidade**, cobrados à parte:
    - abertura, alteração e baixa de empresa;
    - declarações de IRPF dos sócios;
    - recálculos e retificações de períodos anteriores;
    - certidões, parcelamentos e consultoria de planejamento.
-5. **13º honorário**, se for política do escritório, e o índice e a data de reajuste anual.
+6. **13º honorário**, se for política do escritório, e o índice e a data de reajuste anual.
 
 ## Saída
 - **Memória de cálculo** (para uso interno): base, adicionais, fator e total, com o custo estimado em horas e a margem.

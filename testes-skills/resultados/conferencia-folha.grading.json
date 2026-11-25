@@ -1,0 +1,28 @@
+{
+  "skill": "conferencia-folha",
+  "expectations": [
+    {
+      "text": "Recalcula a hora extra com divisor 220 (3.000/220 x 1,5 x 10 = 204,55) e confirma o valor",
+      "passed": true,
+      "evidence": "'3.000,00 / 220 = 13,6364 ... x 1,5 ... x 10 = R$ 204,55. Sem diferenca.'"
+    },
+    {
+      "text": "Não aplica tabela de INSS de memória: pede a tabela vigente ou deixa a conferência do INSS pendente",
+      "passed": true,
+      "evidence": "'INSS: nao conferido ... O que preciso de voce: a tabela de contribuicao do INSS vigente em julho/2027'."
+    },
+    {
+      "text": "Confere o FGTS de 8% sobre a remuneração incluindo a hora extra (e aponta que 240 considera só o salário, se for o caso)",
+      "passed": true,
+      "evidence": "'Lancado: R$ 240,00. Isso e 8% de R$ 3.000,00, ou seja, so do salario-base' e recalcula 256,36 (258,79 com DSR)."
+    },
+    {
+      "text": "Lista as tabelas/premissas usadas",
+      "passed": true,
+      "evidence": "Secao 'Premissas' (divisor 220, HE 50%, calendario de julho/2027 conferido: 4 domingos, sem feriado nacional; tabelas nao informadas)."
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [],
+  "skill_fixes": []
+}

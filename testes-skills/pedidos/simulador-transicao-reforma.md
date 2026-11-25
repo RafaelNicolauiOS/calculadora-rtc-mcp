@@ -1,0 +1,1 @@
+Cliente: escola de idiomas, Lucro Presumido, faturamento R$ 1,2 milhão/ano só de serviço, ISS 2%, PIS/COFINS cumulativo (3,65%). Compras com crédito são uns R$ 150 mil/ano. Quero simular a carga de 2026 a 2033 pra apresentar pra ele.

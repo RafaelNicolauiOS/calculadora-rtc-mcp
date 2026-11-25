@@ -1,0 +1,1 @@
+Funcionário admitido em 10/03/2023, dispensa sem justa causa com aviso indenizado comunicada em 15/08/2027 (último dia trabalhado). Salário 4.000,00, sem variáveis. Nunca tirou férias do período 10/03/2026–09/03/2027 (as anteriores ele gozou). Calcula a rescisão.

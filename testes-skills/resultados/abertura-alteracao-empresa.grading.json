@@ -1,0 +1,31 @@
+{
+  "skill": "abertura-alteracao-empresa",
+  "expectations": [
+    {
+      "text": "Recomenda natureza jurídica para titular único (SLU ou EI) e explica se MEI é ou não possível",
+      "passed": true,
+      "evidence": "'MEI: serve se o faturamento anual ficar dentro do limite ... Se a receita passar do limite ... EI ou, de preferencia, SLU'."
+    },
+    {
+      "text": "Sugere CNAEs pela descrição pedindo confirmação na tabela oficial",
+      "passed": true,
+      "evidence": "'CNAEs sugeridos (validar na tabela oficial CONCLA/IBGE antes do registro)': 9602-5/02 e 9609-2/99."
+    },
+    {
+      "text": "Alerta para licença sanitária/vigilância sanitária da atividade",
+      "passed": true,
+      "evidence": "Etapa 8: 'Licenca sanitaria da Vigilancia Sanitaria municipal, mais vistoria do local' e alerta 'Atividade regulada'."
+    },
+    {
+      "text": "Lista as etapas (viabilidade, registro, CNPJ, inscrição municipal, alvará) e os documentos",
+      "passed": true,
+      "evidence": "Tabela de 10 etapas (viabilidade, DBE, registro na JUCEMG, CNPJ, inscricao municipal, alvara etc.) e lista de documentos."
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [
+    "Valores de memoria ressalvados (limite do MEI 'na casa de R$ 81 mil', Anexo III '6% na primeira faixa'). Aceitavel pela ressalva, mas convem a skill indicar onde confirmar.",
+    "CNAE da massagem: 9609-2/99 e residual; a massagem estetica/relaxante pode ja estar coberta pela 9602-5/02. Ponto a confirmar na CONCLA, baixa confianca."
+  ],
+  "skill_fixes": []
+}

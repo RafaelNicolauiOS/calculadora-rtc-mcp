@@ -45,7 +45,7 @@ Rescisão errada vira reclamação trabalhista e multa por atraso. Esta skill mo
 ## Saída
 - Tabela de verbas (proventos, descontos e líquido) com a memória de cada linha.
 - Valores de FGTS (depósito rescisório e multa).
-- Prazo: o pagamento das verbas e a entrega dos documentos devem ocorrer em até 10 dias contados do término do contrato (art. 477, §6º, da CLT). O atraso gera a multa do §8º.
+- Prazo: o pagamento das verbas e a entrega dos documentos devem ocorrer em até 10 dias corridos contados do término do contrato (art. 477, §6º, da CLT). Com aviso prévio indenizado, o término para esse prazo é o dia do afastamento (último dia trabalhado), **não** a data projetada. A projeção serve só para os avos de férias e 13º e para a data de saída anotada na CTPS. Exemplo: afastamento em 15/08, prazo até 25/08. O atraso gera a multa do §8º.
 - Lista de premissas: as médias consideradas, as tabelas usadas e o que precisa ser confirmado (convenção, estabilidades provisórias como gestante, acidentado ou CIPA).
 
 ## Limites

@@ -1,0 +1,28 @@
+{
+  "skill": "conferencia-sped-efd",
+  "expectations": [
+    {
+      "text": "Detecta que a soma dos itens C170 (500 + 400 = 900) não bate com o valor do documento C100 (1000)",
+      "passed": true,
+      "evidence": "Erro 1: 'Itens: 500,00 + 400,00 = 900,00. Diferenca de 100,00' contra VL_DOC 1.000,00."
+    },
+    {
+      "text": "Detecta que o ICMS dos itens (90 + 72 = 162) não bate com o ICMS do C100/C190 (180)",
+      "passed": true,
+      "evidence": "Erro 2: 'VL_ICMS: C100 180,00 x itens 90,00 + 72,00 = 162,00. Diferenca de 18,00'."
+    },
+    {
+      "text": "Aponta o C190 como inconsistente com os C170",
+      "passed": true,
+      "evidence": "Erro 3: 'C190 x C170 - O resumo ... nao bate com os itens'."
+    },
+    {
+      "text": "Apresenta os achados classificados por gravidade com a correção sugerida",
+      "passed": true,
+      "evidence": "Secoes 'Erros', 'Advertencia (risco fiscal)' e 'Observacoes', cada achado com 'Correcao sugerida'."
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [],
+  "skill_fixes": []
+}

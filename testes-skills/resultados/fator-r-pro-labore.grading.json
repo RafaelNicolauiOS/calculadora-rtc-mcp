@@ -1,0 +1,32 @@
+{
+  "skill": "fator-r-pro-labore",
+  "expectations": [
+    {
+      "text": "Calcula o Fator R atual (120.000 / 600.000 = 20%)",
+      "passed": true,
+      "evidence": "'Fator R = 120.000 / 600.000 = 20%'."
+    },
+    {
+      "text": "Calcula a folha necessária para 28% (168.000 em 12 meses, ou seja, 48.000 a mais, cerca de 4.000/mês considerando encargos)",
+      "passed": true,
+      "evidence": "'28% x 600.000 = R$ 168.000. Faltam R$ 48.000 por ano, ou R$ 4.000 por mes'."
+    },
+    {
+      "text": "Compara o custo do pró-labore adicional (INSS/IRRF) com a economia no DAS, sem inventar as tabelas",
+      "passed": true,
+      "evidence": "Compara a economia de DAS (cerca de R$ 3.600/mes) com o custo de INSS 11% e IRRF ate 27,5% do pro-labore extra; as tabelas da LC 123 foram usadas como 'ordem de grandeza ... Preciso que voce confirme as aliquotas efetivas atuais'. Valores conferem com a lei (17,85% e 10,56%)."
+    },
+    {
+      "text": "Menciona as mudanças recentes na tributação de dividendos ao comparar com distribuição de lucros",
+      "passed": true,
+      "evidence": "'Desde 2026, a Lei 15.270/2025 preve retencao de IR sobre dividendos acima de um valor mensal por fonte pagadora, e uma tributacao minima para altas rendas.'"
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [
+    "Supoe pro-labore atual de cerca de R$ 10 mil/mes e cobra 11% de INSS sobre os R$ 4 mil extras; se for um socio so, ele ja estaria acima do teto do INSS e o custo de INSS adicional seria proximo de zero. Inconsistencia que superestima o custo (conservadora).",
+    "A skill pede 'Tabela mensal: receita, folha, Fator R movel e anexo resultante'; a resposta deu so uma tabela de cenarios de prazo. Menor.",
+    "Usa as tabelas do Simples de memoria, contra a instrucao 'Nao use tabela de memoria' (ver correcao proposta em escolha-regime-tributario)."
+  ],
+  "skill_fixes": []
+}

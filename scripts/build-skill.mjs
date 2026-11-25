@@ -170,7 +170,7 @@ const derivadas = {
   "revisor-notas-rejeitadas": ["erros.md", "cst-cclasstrib.md", "vinculos-ncm-nbs.md"],
   "simples-nacional-reforma": ["simples-atividades.md", "erros.md"],
   "creditos-ibs-cbs": ["cst-cclasstrib.md"],
-  "simulador-transicao-reforma": ["cst-cclasstrib.md"],
+  "simulador-transicao-reforma": ["cst-cclasstrib.md", "vinculos-ncm-nbs.md"],
 };
 for (const [skill, arquivos] of Object.entries(derivadas)) {
   const destino = path.join(root, "skill", skill, "reference");

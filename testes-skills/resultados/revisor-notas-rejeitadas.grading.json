@@ -1,0 +1,28 @@
+{
+  "skill": "revisor-notas-rejeitadas",
+  "expectations": [
+    {
+      "text": "Explica que REG-011 significa NCM fora do anexo da cClassTrib informada",
+      "passed": true,
+      "evidence": "'Esse NCM nao esta vinculado a essa classificacao' e explica que 200035 e a classificacao de higiene pessoal e limpeza (Anexo VIII)."
+    },
+    {
+      "text": "Identifica que o pointer itens/3 é o 4º item da nota",
+      "passed": true,
+      "evidence": "'Item: #/itens/3, ou seja, o 4o item da nota (a contagem comeca em 0).'"
+    },
+    {
+      "text": "Propõe uma classificação alternativa consultando o anexo (por exemplo 200003 se 0201 estiver no anexo da cesta básica) ou orienta voltar para 000001, sem inventar código inexistente",
+      "passed": true,
+      "evidence": "Propoe 200003 (CST 200), 'O NCM 0201 ... esta listado nesse anexo'; confere com vinculos-ncm-nbs.md (200003 aceita 0201, sem excecoes)."
+    },
+    {
+      "text": "Diz que é um erro de cadastro (corrigir no ERP) e não só da nota",
+      "passed": true,
+      "evidence": "'Este e um erro de cadastro: ajuste a cClassTrib do produto ... no ERP para 200003.'"
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [],
+  "skill_fixes": []
+}

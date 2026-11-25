@@ -1,0 +1,28 @@
+{
+  "skill": "relatorio-gerencial-cliente",
+  "expectations": [
+    {
+      "text": "Calcula o lucro de setembro corretamente (210.000 - 118.000 - 38.000 - 12.000 - 9.000 - 6.000 - 16.800 = 10.200)",
+      "passed": true,
+      "evidence": "'Lucro do mes | 10,2 mil' (210,0 - 16,8 - 118,0 - 38,0 - 12,0 - 9,0 - 6,0 = 10,2)."
+    },
+    {
+      "text": "Compara com agosto (queda de 22.000 para 10.200)",
+      "passed": true,
+      "evidence": "'bem abaixo dos R$ 22 mil de agosto, uma queda de 54%' e 'o lucro caiu R$ 11,8 mil'."
+    },
+    {
+      "text": "Explica a diferença entre lucro e caixa pela compra de estoque",
+      "passed": true,
+      "evidence": "'comprar estoque tira dinheiro do caixa, mas so vira custo quando a mercadoria e vendida'."
+    },
+    {
+      "text": "Usa linguagem simples e traz no máximo 3 recomendações práticas",
+      "passed": true,
+      "evidence": "Linguagem acessivel (explica margem bruta/liquida com 'de cada R$ 100 vendidos...') e exatamente 3 recomendacoes."
+    }
+  ],
+  "pass_rate": 1.0,
+  "extra_issues": [],
+  "skill_fixes": []
+}

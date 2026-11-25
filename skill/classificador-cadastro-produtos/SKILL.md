@@ -25,10 +25,14 @@ Antes de começar, pergunte só o que muda a classificação e não está nos da
 ## Método, item a item
 1. **Normalize o código**: só dígitos, sem pontos. NCM com menos de 8 dígitos ou NBS com menos de 9 vai para a fila de revisão como "código incompleto". Classificações com anexo exigem o código completo (REG-015/REG-016).
 2. **Procure tratamento diferenciado pelo código**: em `vinculos-ncm-nbs.md`, ache as classificações cujo anexo aceita o NCM/NBS. Aceita quando o código começa por um prefixo listado e não começa por nenhuma exceção daquele prefixo. Essas são as candidatas fortes, como cesta básica (200003), dispositivos médicos e educação (200028).
+
+   Um código listado entre parênteses como "exceto" **não** é aceito por aquela classificação. Os anexos I (200003, alíquota zero) e VII (200034, redução de 60%) não se sobrepõem: se o NCM está no 200003, ele está excluído do 200034. Só diga que há duas candidatas depois de conferir as exceções.
 3. **Confira com a descrição**: o anexo diz qual NCM pode usar a classificação, não que todo item com aquele NCM deve usá-la. Leia a descrição e a fundamentação em `cst-cclasstrib.md` e confirme que o item se encaixa. Por exemplo, um produto alimentício só entra na cesta básica se estiver no Anexo I com aquela descrição.
 4. **Sem candidata**: use CST 000 / cClassTrib 000001 (tributação integral). Não force uma redução.
 5. **Destinatário especial**: se o cliente vende para órgão público, entidade imune ou exportação, aponte as classificações específicas (procure por "administração pública", "imune" ou "exportação" na referência). Deixe a regra padrão no cadastro e a variação como observação, porque a classificação depende da operação, não do produto.
-6. **Imposto Seletivo**: se o NCM/NBS aparece em `imposto-seletivo.md`, marque "sujeito a IS a partir de 2027". O item precisa do grupo `impostoSeletivo` e de alíquota informada.
+6. **Imposto Seletivo**: se o NCM/NBS aparece em `imposto-seletivo.md`, marque "sujeito a IS a partir de 2027". A cClassTrib do IS depende da posição do cliente na cadeia:
+   - 000001 (com cálculo) só para o primeiro fornecimento, isto é, fabricante ou importador;
+   - 200007 (sem cálculo) na revenda por atacadista ou varejista, porque o IS foi cobrado na operação anterior. Nesse caso não há alíquota de IS no item.
 7. **Documento**: confira se a classificação escolhida é aceita no documento que o cliente usa (coluna DF-e). Se não for, isso gera REG-029.
 
 ## Nível de confiança

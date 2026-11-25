@@ -13,6 +13,8 @@ Para o optante do Simples, a reforma levanta uma decisão comercial nova. O IBS 
 
 ## Cálculo dentro do DAS
 1. Identifique a atividade (cAtivSN) e o anexo. Se a atividade for sujeita ao Fator R, o anexo depende dele (ver a skill do Fator R ou calcule: folha dos últimos 12 meses ÷ receita bruta dos últimos 12 meses).
+
+   Atenção ao cAtivSN 01: ele cobre a revenda (Anexo I) e também a venda de mercadoria industrializada pelo próprio contribuinte, que pela LC 123/2006 (art. 18, §4º, II) é tributada pelo Anexo II. A coluna "Anexo" de `simples-atividades.md` reproduz a tabela da Calculadora e não decide o anexo de cálculo. Para indústria, peça os pCBSSN/pIBSSN do Anexo II apurados no PGDAS-D.
 2. A alíquota efetiva do Simples vem do PGDAS-D. A Calculadora não a calcula. Peça ao usuário os percentuais efetivos de CBS e IBS do anexo (pCBSSN e pIBSSN). Nos anexos III a V com ISS, peça também o par "sem redistribuição de ISS".
 3. CBS = base × pCBSSN e IBS = base × pIBSSN, item a item, com 2 casas.
 4. O crédito que o comprador pode apropriar corresponde ao IBS/CBS efetivamente pago dentro do Simples.

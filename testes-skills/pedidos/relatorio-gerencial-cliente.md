@@ -1,0 +1,1 @@
+DRE de setembro de uma loja de roupas: receita 210.000; CMV 118.000; despesas com pessoal 38.000; aluguel 12.000; marketing 9.000; outras despesas 6.000; impostos sobre venda 16.800. Agosto o lucro foi 22.000. Caixa caiu 15.000 no mês porque comprou estoque para o Natal. Faz o relatório pro dono.
